@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Login | My Life Care</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="auth-box">
+    <h2>Welcome Back</h2>
+    <p class="subtitle">Login to your My Life Care account</p>
+
+    <input type="email" id="email" placeholder="Email Address">
+    <input type="password" id="password" placeholder="Password">
+
+    <button class="btn-primary" onclick="login()">Login</button>
+
+    <p class="switch">Don’t have an account?  
+      <a href="register.html">Create one</a>
+    </p>
+  </div>
+
+<script>
+function login() {
+    const email = document.getElementById("email").value;
+    const password = document.getElementById("password").value;
+
+    fetch("/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password })
+    })
+    .then(res => res.json())
+    .then(data => {
+        alert(data.message);
+
+        if (data.success) {
+            // save user in browser
+            localStorage.setItem("mlcUser", JSON.stringify(data.user));
+
+            // go to dashboard
+            window.location.href = "dashboard.html";
+        }
+    })
+    .catch(err => {
+        alert("Error connecting to server");
+    });
+}
+</script>
+
+</body>
+</html>

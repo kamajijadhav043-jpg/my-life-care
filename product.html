@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Product Details | My Life Care</title>
+  <link rel="stylesheet" href="style.css">
+
+  <style>
+    .product-container {
+      width: 80%;
+      margin: 30px auto;
+      background: white;
+      padding: 25px;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      display: flex;
+      gap: 30px;
+    }
+
+    .product-container img {
+      width: 300px;
+      border-radius: 12px;
+    }
+
+    .product-details h2 {
+      margin: 0;
+      color: #0c8f5c;
+    }
+
+    .product-details button {
+      width: 200px;
+      padding: 12px;
+      margin-top: 15px;
+      background: #0c8f5c;
+      border: none;
+      border-radius: 8px;
+      color: white;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="product-container">
+  <img id="productImage" src="">
+  
+  <div class="product-details">
+    <h2 id="productName"></h2>
+    <h3>₹<span id="productPrice"></span></h3>
+    <p id="productDesc"></p>
+
+    <button onclick="addToCart(selectedId)">Add to Cart</button>
+  </div>
+</div>
+
+<script>
+let selectedId = new URLSearchParams(window.location.search).get("id");
+
+fetch("/products")
+  .then(res => res.json())
+  .then(products => {
+      let p = products.find(pr => pr.id == selectedId);
+      document.getElementById("productImage").src = p.image;
+      document.getElementById("productName").innerText = p.name;
+      document.getElementById("productPrice").innerText = p.price;
+      document.getElementById("productDesc").innerText = p.description;
+  });
+
+function addToCart(id) {
+    let cart = JSON.parse(localStorage.getItem("mlcCart")) || [];
+    let found = cart.find(item => item.id == id);
+
+    if (found) found.qty += 1;
+    else cart.push({ id, qty: 1 });
+
+    localStorage.setItem("mlcCart", JSON.stringify(cart));
+    alert("Added to cart!");
+}
+</script>
+
+</body>
+</html>

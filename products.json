@@ -1,0 +1,30 @@
+[
+  {
+    "id": 1,
+    "name": "Herbal Wellness Pack",
+    "price": 799,
+    "description": "Boost immunity, energy, and overall wellness.",
+    "image": "images/product1.jpg"
+  },
+  {
+    "id": 2,
+    "name": "Daily Vitamin Combo",
+    "price": 499,
+    "description": "Essential nutrients for your family.",
+    "image": "images/product2.jpg"
+  },
+  {
+    "id": 3,
+    "name": "Skin Care Essentials",
+    "price": 899,
+    "description": "Gentle skin care pack for daily glow.",
+    "image": "images/product3.jpg"
+  },
+  {
+    "id": 4,
+    "name": "Pain Relief Gel",
+    "price": 299,
+    "description": "Quick comfort for muscle and joint pain.",
+    "image": "images/product4.jpg"
+  }
+]

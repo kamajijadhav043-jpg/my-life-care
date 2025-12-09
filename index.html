@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>My Life Care | Home</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- MOBILE MENU BUTTON (shown on mobile) -->
+<div class="mobile-menu-btn" onclick="toggleMenu()">☰</div>
+
+<!-- NAVBAR -->
+<div class="navbar">
+  <div class="logo">My Life Care</div>
+  <div class="nav-links" id="mobileMenu">
+    <a href="index.html">Home</a>
+    <a href="cart.html">Cart</a>
+    <a href="login.html">Login</a>
+    <a href="dashboard.html">Dashboard</a>
+  </div>
+</div>
+
+<!-- HERO SECTION -->
+<div class="hero">
+  <h1>Your Wellness Journey Begins Here 🌿</h1>
+  <p>Quality wellness products for a healthier and happier lifestyle.</p>
+  <button onclick="document.getElementById('productList').scrollIntoView({behavior:'smooth'})">
+    Shop Now
+  </button>
+</div>
+
+<!-- PRODUCTS SECTION -->
+<h2 style="text-align:center; margin-top:40px;">Our Products</h2>
+<div id="productList"></div>
+
+<!-- FOOTER -->
+<div class="footer">
+  © 2025 My Life Care — Designed with ❤️ for Wellness
+</div>
+
+<script>
+let allProducts = [];
+
+fetch("/products")
+  .then(res => res.json())
+  .then(data => {
+      allProducts = data;
+      showProducts(data);
+  });
+
+function showProducts(products) {
+    const list = document.getElementById("productList");
+    list.innerHTML = products.map(p => `
+       <div class="product-card">
+           <img src="${p.image}" class="product-img">
+           <h3>${p.name}</h3>
+           <p>${p.description}</p>
+           <strong>₹${p.price}</strong>
+           <button onclick="addToCart(${p.id})">Add to Cart</button>
+           <button onclick="location.href='product.html?id=${p.id}'">View Details</button>
+       </div>
+    `).join("");
+}
+
+function addToCart(id) {
+    let cart = JSON.parse(localStorage.getItem("mlcCart")) || [];
+    let item = cart.find(i => i.id === id);
+
+    if (item) item.qty++;
+    else cart.push({ id: id, qty: 1 });
+
+    localStorage.setItem("mlcCart", JSON.stringify(cart));
+    alert("Added to cart!");
+}
+
+// 🔽 MOBILE MENU TOGGLER
+function toggleMenu() {
+  const menu = document.getElementById("mobileMenu");
+  menu.style.display = (menu.style.display === "block") ? "none" : "block";
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Dashboard | My Life Care</title>
+  <link rel="stylesheet" href="style.css">
+
+  <style>
+    body {
+      display: flex;
+      background: #f4f7fb;
+      margin: 0;
+      font-family: Arial;
+    }
+
+    .sidebar {
+      width: 240px;
+      background: #0c8f5c;
+      color: white;
+      height: 100vh;
+      padding: 20px;
+      position: fixed;
+      left: 0;
+      top: 0;
+    }
+
+    .sidebar h2 {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .sidebar a {
+      display: block;
+      padding: 12px;
+      margin: 6px 0;
+      color: white;
+      text-decoration: none;
+      border-radius: 6px;
+    }
+
+    .sidebar a:hover {
+      background: rgba(255,255,255,0.2);
+    }
+
+    .logout {
+      background: #ff4e4e;
+      padding: 10px;
+      margin-top: 20px;
+      border-radius: 6px;
+      cursor: pointer;
+      text-align: center;
+    }
+
+    .logout:hover {
+      background: #d83b3b;
+    }
+
+    .content {
+      margin-left: 260px;
+      padding: 25px;
+      width: calc(100% - 260px);
+    }
+
+    .card {
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <h2>My Life Care</h2>
+
+    <a href="#" onclick="showSection('welcome')">Home</a>
+    <a href="#" onclick="showSection('profile')">Profile</a>
+    <a href="#" onclick="showSection('orders')">My Orders</a>
+    <a href="cart.html">My Cart</a>
+    <a href="#" onclick="showSection('products')">Products</a>
+
+    <div id="adminMenu" style="display:none;">
+      <hr>
+      <a href="#" onclick="showSection('adminProducts')">Admin: Products</a>
+      <a href="#" onclick="showSection('adminOrders')">Admin: Orders</a>
+      <a href="#" onclick="showSection('adminUsers')">Admin: Users</a>
+    </div>
+
+    <div class="logout" onclick="logout()">Logout</div>
+  </div>
+
+  <!-- Content -->
+  <div class="content">
+    
+    <div id="welcome" class="card">
+      <h2>Welcome, <span id="userName"></span> 🌿</h2>
+      <p>Your personalized dashboard at My Life Care.</p>
+    </div>
+
+    <div id="profile" class="card" style="display:none;">
+      <h3>Your Profile</h3>
+      <p>Email: <span id="profileEmail"></span></p>
+    </div>
+
+    <div id="orders" class="card" style="display:none;">
+      <h3>Your Orders</h3>
+      <div id="orderList"></div>
+    </div>
+
+    <div id="products" class="card" style="display:none;">
+      <h3>Available Products</h3>
+      <p>Products will be displayed here later.</p>
+    </div>
+
+    <!-- Admin Sections -->
+
+    <div id="adminProducts" class="card" style="display:none;">
+  <h3>Admin: Manage Products</h3>
+
+  <button class="btn-primary" onclick="showAddForm()">Add New Product</button>
+
+  <div id="productListAdmin" style="margin-top:20px;"></div>
+
+  <!-- Add / Edit Form -->
+  <div id="productForm" style="display:none; margin-top:20px;">
+    <h3 id="formTitle">Add Product</h3>
+    <input id="pName" placeholder="Product Name">
+    <input id="pPrice" type="number" placeholder="Price">
+    <input id="pDesc" placeholder="Description">
+    <input id="pImage" placeholder="Image URL">
+
+    <button class="btn-primary" onclick="saveProduct()">Save</button>
+    <button class="btn-primary" style="background:red;" onclick="hideForm()">Cancel</button>
+  </div>
+</div>
+
+<script>
+let editingProduct = null;
+
+function loadAdminProducts() {
+    fetch("/all-products")
+      .then(res => res.json())
+      .then(data => {
+          const list = document.getElementById("productListAdmin");
+          if (data.length === 0) {
+              list.innerHTML = "<p>No products available.</p>";
+              return;
+          }
+
+          list.innerHTML = data.map(p => `
+            <div style='padding:10px;border-bottom:1px solid #ddd;'>
+                <strong>${p.name}</strong> — ₹${p.price}<br>
+                <small>${p.description}</small><br>
+                <button onclick='editProduct(${p.id})'>Edit</button>
+                <button onclick='deleteProduct(${p.id})' style='background:red;color:white;'>Delete</button>
+            </div>
+          `).join("");
+      });
+}
+
+// Show form
+if (id === "adminProducts") loadAdminProducts();
+
+function showAddForm() {
+  editingProduct = null;
+  document.getElementById("formTitle").innerText = "Add Product";
+  document.getElementById("productForm").style.display = "block";
+
+  document.getElementById("pName").value = "";
+  document.getElementById("pPrice").value = "";
+  document.getElementById("pDesc").value = "";
+  document.getElementById("pImage").value = "";
+}
+
+function hideForm() {
+  document.getElementById("productForm").style.display = "none";
+}
+
+// Save product (Add or Edit)
+function saveProduct() {
+  const prod = {
+    id: editingProduct ? editingProduct.id : undefined,
+    name: document.getElementById("pName").value,
+    price: Number(document.getElementById("pPrice").value),
+    description: document.getElementById("pDesc").value,
+    image: document.getElementById("pImage").value
+  };
+
+  const url = editingProduct ? "/edit-product" : "/add-product";
+
+  fetch(url, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(prod)
+  })
+  .then(res => res.json())
+  .then(data => {
+      alert(data.message);
+      hideForm();
+      loadAdminProducts();
+  });
+}
+
+function editProduct(id) {
+    fetch("/all-products")
+      .then(res => res.json())
+      .then(products => {
+          editingProduct = products.find(p => p.id === id);
+
+          document.getElementById("pName").value = editingProduct.name;
+          document.getElementById("pPrice").value = editingProduct.price;
+          document.getElementById("pDesc").value = editingProduct.description;
+          document.getElementById("pImage").value = editingProduct.image;
+
+          document.getElementById("formTitle").innerText = "Edit Product";
+          document.getElementById("productForm").style.display = "block";
+      });
+}
+
+function deleteProduct(id) {
+    fetch("/delete-product", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ id })
+    })
+    .then(res => res.json())
+    .then(data => {
+        alert(data.message);
+        loadAdminProducts();
+    });
+}
+</script>
+
+
+    <div id="adminOrders" class="card" style="display:none;">
+  <h3>All Orders</h3>
+  <div id="allOrdersList"></div>
+</div>
+
+<script>
+function loadAllOrders() {
+    fetch("/all-orders")
+      .then(res => res.json())
+      .then(data => {
+          const list = document.getElementById("allOrdersList");
+          if (data.length === 0) {
+              list.innerHTML = "<p>No orders yet.</p>";
+              return;
+          }
+
+          list.innerHTML = data.map(o => `
+            <div style='margin-bottom:15px;padding:10px;border:1px solid #ccc;border-radius:10px;'>
+                <strong>Order ID:</strong> ${o.id}<br>
+                <strong>User:</strong> ${o.email}<br>
+                <strong>Total:</strong> ₹${o.total}<br>
+                <strong>Date:</strong> ${o.date}<br>
+                <strong>Items:</strong> ${o.items.length}
+            </div>
+          `).join("");
+      });
+}
+</script>
+
+    <div id="adminUsers" class="card" style="display:none;">
+      <h3>Admin: Manage Users</h3>
+      <p>User listing will come here.</p>
+    </div>
+
+  </div>
+
+<script>
+// Load user from localStorage
+let user = JSON.parse(localStorage.getItem("mlcUser"));
+
+if (!user) {
+  alert("Please login first!");
+  window.location.href = "login.html";
+}
+
+document.getElementById("userName").innerText = user.name;
+document.getElementById("profileEmail").innerText = user.email;
+
+// Show admin menu
+if (user.email === "admin@mylifecare.com") {
+  document.getElementById("adminMenu").style.display = "block";
+}
+
+// Logout
+function logout() {
+  localStorage.removeItem("mlcUser");
+  alert("Logged out!");
+  window.location.href = "login.html";
+}
+
+// Change pages
+function if (id === "adminOrders") loadAllOrders();
+ {
+  document.querySelectorAll(".card").forEach(c => c.style.display = "none");
+  document.getElementById(id).style.display = "block";
+
+  if (id === "orders") loadMyOrders();
+  if (id === "adminOrders") loadAllOrders();
+}
+
+// Load user orders
+function loadMyOrders() {
+  fetch("/my-orders", {
+    method: "POST",
+    headers: {"Content-Type": "application/json"},
+    body: JSON.stringify({ email: user.email })
+  })
+  .then(res => res.json())
+  .then(data => {
+    const list = document.getElementById("orderList");
+    if (data.length === 0) {
+      list.innerHTML = "<p>You have no orders yet.</p>";
+      return;
+    }
+
+    list.innerHTML = data.map(o => `
+      <div style='margin-bottom:15px;padding:10px;border:1px solid #ccc;border-radius:10px;'>
+        <strong>Order ID:</strong> ${o.id}<br>
+        <strong>Date:</strong> ${o.date}<br>
+        <strong>Total:</strong> ₹${o.total}<br>
+        <strong>Items:</strong> ${o.items.length}
+      </div>
+    `).join("");
+  });
+}
+
+// Load all orders (Admin)
+function loadAllOrders() {
+  fetch("/all-orders")
+    .then(res => res.json())
+    .then(data => {
+      const list = document.getElementById("allOrdersList");
+      if (data.length === 0) {
+        list.innerHTML = "<p>No orders yet.</p>";
+        return;
+      }
+
+      list.innerHTML = data.map(o => `
+        <div style='margin-bottom:15px;padding:10px;border:1px solid #ccc;border-radius:10px;'>
+          <strong>Order ID:</strong> ${o.id}<br>
+          <strong>User:</strong> ${o.email}<br>
+          <strong>Total:</strong> ₹${o.total}<br>
+          <strong>Date:</strong> ${o.date}<br>
+          <strong>Items:</strong> ${o.items.length}
+        </div>
+      `).join("");
+    });
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Your Cart | My Life Care</title>
+  <link rel="stylesheet" href="style.css">
+
+  <style>
+    .cart-item {
+      display: flex;
+      justify-content: space-between;
+      padding: 12px;
+      margin-bottom: 10px;
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.05);
+    }
+    .cart-item h4 {
+      margin: 0;
+    }
+    .cart-item button {
+      background: red;
+      color: white;
+      border: none;
+      padding: 6px 12px;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="auth-box">
+    <h2>Your Cart</h2>
+    <div id="cartItems"></div>
+
+    <h3>Total: ₹<span id="cartTotal">0</span></h3>
+
+    <button class="btn-primary" onclick="checkout()">Place Order</button>
+  </div>
+
+<script>
+// Load products first
+let products = [];
+
+fetch("/products")
+  .then(res => res.json())
+  .then(data => {
+      products = data;
+      loadCart();
+  });
+
+function loadCart() {
+  let cart = JSON.parse(localStorage.getItem("mlcCart")) || [];
+  const container = document.getElementById("cartItems");
+  container.innerHTML = "";
+
+  let total = 0;
+
+  cart.forEach(item => {
+      const product = products.find(p => p.id === item.id);
+      if (!product) return;
+
+      const subtotal = product.price * item.qty;
+      total += subtotal;
+
+      container.innerHTML += `
+        <div class="cart-item">
+          <h4>${product.name} (x${item.qty})</h4>
+          <p>₹${subtotal}</p>
+          <button onclick="removeItem(${item.id})">Remove</button>
+        </div>
+      `;
+  });
+
+  document.getElementById("cartTotal").innerText = total;
+}
+
+function removeItem(id) {
+  let cart = JSON.parse(localStorage.getItem("mlcCart")) || [];
+  cart = cart.filter(item => item.id !== id);
+  localStorage.setItem("mlcCart", JSON.stringify(cart));
+  loadCart();
+}
+
+function checkout() {
+    let cart = JSON.parse(localStorage.getItem("mlcCart")) || [];
+    let user = JSON.parse(localStorage.getItem("mlcUser"));
+    let total = document.getElementById("cartTotal").innerText;
+
+    fetch("/place-order", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({
+            email: user.email,
+            items: cart,
+            total: total
+        })
+    })
+    .then(res => res.json())
+    .then(data => {
+        alert(data.message);
+        localStorage.removeItem("mlcCart");
+        window.location.href = "dashboard.html";
+    });
+}
+
+</script>
+
+</body>
+</html>
