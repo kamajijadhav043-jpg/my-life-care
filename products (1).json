@@ -1,0 +1,402 @@
+[
+  {
+    "id": 1,
+    "name": "Ashwagandha Stress Relief Tablets",
+    "price": 299,
+    "description": "Helps reduce stress and boost stamina",
+    "image": "images/ashwagandha.jpg",
+    "category": "Herbal"
+  },
+  {
+    "id": 2,
+    "name": "Shilajit Pure Resin 15g",
+    "price": 699,
+    "description": "Natural vitality and strength booster",
+    "image": "images/shilajit.jpg",
+    "category": "Herbal"
+  },
+  {
+    "id": 3,
+    "name": "Giloy Immunity Booster Capsules",
+    "price": 249,
+    "description": "Boosts immunity and detox support",
+    "image": "images/giloy.jpg",
+    "category": "Herbal"
+  },
+  {
+    "id": 4,
+    "name": "Tulsi Drops Ayurvedic Extract",
+    "price": 199,
+    "description": "Supports lungs and immunity",
+    "image": "images/tulsi.jpg",
+    "category": "Herbal"
+  },
+  {
+    "id": 5,
+    "name": "Amla Juice Vitamin C Rich",
+    "price": 180,
+    "description": "Natural immunity and digestion support",
+    "image": "images/amla.jpg",
+    "category": "Herbal"
+  },
+  {
+    "id": 6,
+    "name": "Vitamin C 1000mg Chewable",
+    "price": 349,
+    "description": "Antioxidant for immunity and skin",
+    "image": "images/vitamin_c.jpg",
+    "category": "Vitamins"
+  },
+  {
+    "id": 7,
+    "name": "Vitamin D3 5000IU Softgels",
+    "price": 299,
+    "description": "Bone and joint support",
+    "image": "images/vitamin_d3.jpg",
+    "category": "Vitamins"
+  },
+  {
+    "id": 8,
+    "name": "Vitamin B-Complex Capsules",
+    "price": 220,
+    "description": "Supports energy and nerve health",
+    "image": "images/b_complex.jpg",
+    "category": "Vitamins"
+  },
+  {
+    "id": 9,
+    "name": "Omega 3 Fish Oil Triple Strength",
+    "price": 499,
+    "description": "Heart and brain health support",
+    "image": "images/omega3.jpg",
+    "category": "Vitamins"
+  },
+  {
+    "id": 10,
+    "name": "Multivitamin for Men",
+    "price": 399,
+    "description": "Daily health support for men",
+    "image": "images/multivitamin_men.jpg",
+    "category": "Vitamins"
+  },
+  {
+    "id": 11,
+    "name": "Multivitamin for Women",
+    "price": 399,
+    "description": "Daily health support for women",
+    "image": "images/multivitamin_women.jpg",
+    "category": "Vitamins"
+  },
+  {
+    "id": 12,
+    "name": "Biotin 10000mcg Hair Nails Skin",
+    "price": 289,
+    "description": "Supports hair growth and glow",
+    "image": "images/biotin.jpg",
+    "category": "Vitamins"
+  },
+  {
+    "id": 13,
+    "name": "Aloe Vera Gel Skin Hydrating",
+    "price": 149,
+    "description": "Cooling skin moisturizer",
+    "image": "images/aloe_vera_gel.jpg",
+    "category": "Skin Care"
+  },
+  {
+    "id": 14,
+    "name": "Vitamin C Face Serum",
+    "price": 249,
+    "description": "Brightening and anti-oxidant serum",
+    "image": "images/vitamin_c_serum.jpg",
+    "category": "Skin Care"
+  },
+  {
+    "id": 15,
+    "name": "Niacinamide 10% Serum",
+    "price": 259,
+    "description": "Reduces acne marks and pores",
+    "image": "images/niacinamide_serum.jpg",
+    "category": "Skin Care"
+  },
+  {
+    "id": 16,
+    "name": "Ubtan Face Wash with Turmeric",
+    "price": 199,
+    "description": "Natural glow and oil control",
+    "image": "images/ubtan_facewash.jpg",
+    "category": "Skin Care"
+  },
+  {
+    "id": 17,
+    "name": "Sunscreen SPF 50 PA+++",
+    "price": 299,
+    "description": "Protects skin from UV rays",
+    "image": "images/sunscreen_spf50.jpg",
+    "category": "Skin Care"
+  },
+  {
+    "id": 18,
+    "name": "Tea Tree Anti Acne Face Wash",
+    "price": 229,
+    "description": "Controls acne and pimples",
+    "image": "images/tea_tree_facewash.jpg",
+    "category": "Skin Care"
+  },
+  {
+    "id": 19,
+    "name": "Kesar Glow Cream",
+    "price": 349,
+    "description": "Instant glow and hydration",
+    "image": "images/kesar_cream.jpg",
+    "category": "Skin Care"
+  },
+  {
+    "id": 20,
+    "name": "Aloe Turmeric Healing Cream",
+    "price": 225,
+    "description": "Soothes irritated skin",
+    "image": "images/turmeric_cream.jpg",
+    "category": "Skin Care"
+  },
+  {
+    "id": 21,
+    "name": "Onion Hair Oil Red Onion Seed",
+    "price": 299,
+    "description": "Promotes hair growth and reduces hair fall",
+    "image": "images/onion_hair_oil.jpg",
+    "category": "Hair Care"
+  },
+  {
+    "id": 22,
+    "name": "Keratin Smooth Shampoo",
+    "price": 275,
+    "description": "Frizz control and smooth hair",
+    "image": "images/keratin_shampoo.jpg",
+    "category": "Hair Care"
+  },
+  {
+    "id": 23,
+    "name": "Coconut Hair Oil Cold Pressed",
+    "price": 199,
+    "description": "Deep nourishment for scalp",
+    "image": "images/coconut_oil.jpg",
+    "category": "Hair Care"
+  },
+  {
+    "id": 24,
+    "name": "Herbal Anti Hair Fall Shampoo",
+    "price": 249,
+    "description": "Strengthens roots and reduces fall",
+    "image": "images/herbal_shampoo.jpg",
+    "category": "Hair Care"
+  },
+  {
+    "id": 25,
+    "name": "Hair Growth Serum Biotin Boost",
+    "price": 349,
+    "description": "Hair strengthening formula",
+    "image": "images/hair_growth_serum.jpg",
+    "category": "Hair Care"
+  },
+  {
+    "id": 26,
+    "name": "Protein Powder Chocolate 1kg",
+    "price": 1199,
+    "description": "Muscle growth and recovery",
+    "image": "images/protein_powder.jpg",
+    "category": "Nutrition"
+  },
+  {
+    "id": 27,
+    "name": "Mass Gainer High Calorie 1kg",
+    "price": 999,
+    "description": "Healthy weight gain formula",
+    "image": "images/mass_gainer.jpg",
+    "category": "Nutrition"
+  },
+  {
+    "id": 28,
+    "name": "Green Tea Lemon Flavor",
+    "price": 199,
+    "description": "Boosts metabolism and digestion",
+    "image": "images/green_tea.jpg",
+    "category": "Nutrition"
+  },
+  {
+    "id": 29,
+    "name": "Herbal Kadha Immunity Drink",
+    "price": 189,
+    "description": "Ayurvedic wellness drink",
+    "image": "images/kadha.jpg",
+    "category": "Nutrition"
+  },
+  {
+    "id": 30,
+    "name": "Energizing ORS Hydration Drink",
+    "price": 150,
+    "description": "Hydration and electrolyte balance",
+    "image": "images/ors.jpg",
+    "category": "Nutrition"
+  },
+  {
+    "id": 31,
+    "name": "Apple Cider Vinegar with Mother",
+    "price": 299,
+    "description": "Weight management and digestion",
+    "image": "images/acv.jpg",
+    "category": "Nutrition"
+  },
+  {
+    "id": 32,
+    "name": "Herbal Detox Tea",
+    "price": 249,
+    "description": "Body cleansing and freshness",
+    "image": "images/detox_tea.jpg",
+    "category": "Nutrition"
+  },
+  {
+    "id": 33,
+    "name": "Peanut Butter Crunchy 1kg",
+    "price": 349,
+    "description": "High protein peanut spread",
+    "image": "images/peanut_butter.jpg",
+    "category": "Food"
+  },
+  {
+    "id": 34,
+    "name": "Almonds Premium 500g",
+    "price": 499,
+    "description": "Healthy snacking option",
+    "image": "images/almonds.jpg",
+    "category": "Food"
+  },
+  {
+    "id": 35,
+    "name": "Cashews Premium 500g",
+    "price": 549,
+    "description": "Healthy energy snack",
+    "image": "images/cashews.jpg",
+    "category": "Food"
+  },
+  {
+    "id": 36,
+    "name": "Raisin Black Kishmish 500g",
+    "price": 299,
+    "description": "Natural sweet antioxidant snack",
+    "image": "images/raisins.jpg",
+    "category": "Food"
+  },
+  {
+    "id": 37,
+    "name": "Chyawanprash Immunity Booster",
+    "price": 299,
+    "description": "Classic ayurvedic health formula",
+    "image": "images/chyawanprash.jpg",
+    "category": "Herbal"
+  },
+  {
+    "id": 38,
+    "name": "Moringa Leaf Powder",
+    "price": 249,
+    "description": "Superfood rich in vitamins",
+    "image": "images/moringa.jpg",
+    "category": "Herbal"
+  },
+  {
+    "id": 39,
+    "name": "Triphala Digestive Cleanser",
+    "price": 199,
+    "description": "Supports digestion and detox",
+    "image": "images/triphala.jpg",
+    "category": "Herbal"
+  },
+  {
+    "id": 40,
+    "name": "Brahmi Brain Support Capsules",
+    "price": 259,
+    "description": "Memory and focus booster",
+    "image": "images/brahmi.jpg",
+    "category": "Herbal"
+  },
+  {
+    "id": 41,
+    "name": "Neem Anti Acne Capsules",
+    "price": 225,
+    "description": "Skin detox and acne control",
+    "image": "images/neem_capsules.jpg",
+    "category": "Herbal"
+  },
+  {
+    "id": 42,
+    "name": "Liver Detox Milk Thistle",
+    "price": 349,
+    "description": "Improves liver function",
+    "image": "images/milk_thistle.jpg",
+    "category": "Herbal"
+  },
+  {
+    "id": 43,
+    "name": "Joint Support Glucosamine",
+    "price": 399,
+    "description": "Joint flexibility formula",
+    "image": "images/glucosamine.jpg",
+    "category": "Wellness"
+  },
+  {
+    "id": 44,
+    "name": "Collagen Powder for Skin",
+    "price": 799,
+    "description": "Anti-ageing and hydration support",
+    "image": "images/collagen.jpg",
+    "category": "Wellness"
+  },
+  {
+    "id": 45,
+    "name": "Electrolyte Energy Drink Mix",
+    "price": 120,
+    "description": "Rehydrates instantly",
+    "image": "images/electrolyte_mix.jpg",
+    "category": "Nutrition"
+  },
+  {
+    "id": 46,
+    "name": "Digestive Enzyme Tablets",
+    "price": 249,
+    "description": "Improves digestion and gut health",
+    "image": "images/digestive_enzymes.jpg",
+    "category": "Wellness"
+  },
+  {
+    "id": 47,
+    "name": "Immunity Booster Combo Pack",
+    "price": 799,
+    "description": "Herbal immunity combo",
+    "image": "images/immunity_combo.jpg",
+    "category": "Combo"
+  },
+  {
+    "id": 48,
+    "name": "Hair Care Combo (Oil+Shampoo)",
+    "price": 599,
+    "description": "Complete hair fall control routine",
+    "image": "images/hair_combo.jpg",
+    "category": "Combo"
+  },
+  {
+    "id": 49,
+    "name": "Skin Glow Combo (Serum+Cream)",
+    "price": 699,
+    "description": "Full brightening skincare kit",
+    "image": "images/skin_combo.jpg",
+    "category": "Combo"
+  },
+  {
+    "id": 50,
+    "name": "Daily Essentials Multivitamin Kit",
+    "price": 899,
+    "description": "Complete daily health bundle",
+    "image": "images/daily_vitamins.jpg",
+    "category": "Combo"
+  }
+]
