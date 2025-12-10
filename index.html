@@ -32,6 +32,18 @@
 
 <!-- PRODUCTS SECTION -->
 <h2 style="text-align:center; margin-top:40px;">Our Products</h2>
+
+<!-- SEARCH BAR -->
+<div style="text-align:center; margin:20px;">
+  <input 
+    type="text" 
+    id="searchInput" 
+    placeholder="Search products..." 
+    style="padding:10px; width:60%; font-size:16px; border-radius:8px; border:1px solid #ccc;"
+    onkeyup="searchProducts()"
+  >
+</div>
+
 <div id="productList"></div>
 
 <!-- FOOTER -->
@@ -72,6 +84,17 @@ function addToCart(id) {
 
     localStorage.setItem("mlcCart", JSON.stringify(cart));
     alert("Added to cart!");
+}
+function searchProducts() {
+    const keyword = document.getElementById("searchInput").value.toLowerCase();
+
+    const filtered = allProducts.filter(p =>
+        p.name.toLowerCase().includes(keyword) ||
+        p.description.toLowerCase().includes(keyword) ||
+        (p.category && p.category.toLowerCase().includes(keyword))
+    );
+
+    showProducts(filtered);
 }
 
 // 🔽 MOBILE MENU TOGGLER
