@@ -49,7 +49,20 @@ fetch("/products")
       showProducts(data);
   });
 
-function showProducts(products) {
+<script>
+function searchProducts() {
+    const keyword = document.getElementById("searchInput").value.toLowerCase();
+
+    const filtered = allProducts.filter(p => 
+        p.name.toLowerCase().includes(keyword) ||
+        p.description.toLowerCase().includes(keyword) ||
+        p.category.toLowerCase().includes(keyword)
+    );
+
+    showProducts(filtered);
+}
+</script>
+
     const list = document.getElementById("productList");
     list.innerHTML = products.map(p => `
        <div class="product-card">
