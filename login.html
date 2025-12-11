@@ -1,53 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Login | My Life Care</title>
-  <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<title>Login | My Life Care</title>
+<link rel="stylesheet" href="auth.css">
 </head>
 <body>
 
-  <div class="auth-box">
-    <h2>Welcome Back</h2>
-    <p class="subtitle">Login to your My Life Care account</p>
+<div class="auth-container">
+    <div class="auth-card">
+        <div class="left">
+            <h2>Sign In</h2>
 
-    <input type="email" id="email" placeholder="Email Address">
-    <input type="password" id="password" placeholder="Password">
+            <div class="social-row">
+                <div class="social-btn">f</div>
+                <div class="social-btn">G</div>
+                <div class="social-btn">in</div>
+            </div>
 
-    <button class="btn-primary" onclick="login()">Login</button>
+            <p class="light-text">or use your email</p>
 
-    <p class="switch">Don’t have an account?  
-      <a href="register.html">Create one</a>
-    </p>
-  </div>
+            <input type="email" id="email" placeholder="Email Address">
+            <input type="password" id="password" placeholder="Password">
 
-<script>
-function login() {
-    const email = document.getElementById("email").value;
-    const password = document.getElementById("password").value;
+            <p class="forgot">Forgot your password?</p>
 
-    fetch("/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, password })
-    })
-    .then(res => res.json())
-    .then(data => {
-        alert(data.message);
+            <button class="btn" onclick="login()">Sign In</button>
+        </div>
 
-        if (data.success) {
-            // save user in browser
-            localStorage.setItem("mlcUser", JSON.stringify(data.user));
+        <div class="right">
+            <h2>Hey There!</h2>
+            <p>Begin your amazing journey by creating an account with us today.</p>
+            <a href="register.html"><button class="btn-outline">Sign Up</button></a>
+        </div>
+    </div>
+</div>
 
-            // go to dashboard
-            window.location.href = "dashboard.html";
-        }
-    })
-    .catch(err => {
-        alert("Error connecting to server");
-    });
-}
-</script>
-
+<script src="auth.js"></script>
 </body>
 </html>
