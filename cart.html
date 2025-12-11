@@ -1,110 +1,230 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Your Cart | My Life Care</title>
-  <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<title>Cart | LyfeCare</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <style>
+<style>
+    body {
+        margin: 0;
+        font-family: "Poppins", sans-serif;
+        background: radial-gradient(circle at top left, rgba(162,75,255,0.25), transparent 60%),
+                    radial-gradient(circle at bottom right, rgba(122,0,230,0.25), transparent 60%),
+                    #050306;
+        color: #eee;
+        padding: 20px;
+    }
+
+    .container {
+        max-width: 900px;
+        margin: auto;
+    }
+
+    h1 {
+        text-align: center;
+        margin-bottom: 25px;
+        font-size: 34px;
+        color: #a24bff;
+    }
+
     .cart-item {
-      display: flex;
-      justify-content: space-between;
-      padding: 12px;
-      margin-bottom: 10px;
-      background: #fff;
-      border-radius: 8px;
-      box-shadow: 0 3px 8px rgba(0,0,0,0.05);
+        background: rgba(255,255,255,0.05);
+        padding: 18px;
+        border-radius: 16px;
+        margin-bottom: 18px;
+        border: 1px solid rgba(255,255,255,0.07);
+        box-shadow: 0 0 25px rgba(162,75,255,0.25);
+        display: flex;
+        align-items: center;
+        gap: 18px;
     }
-    .cart-item h4 {
-      margin: 0;
+
+    .cart-item img {
+        width: 110px;
+        height: 110px;
+        border-radius: 12px;
+        object-fit: cover;
+        border: 1px solid rgba(255,255,255,0.08);
     }
-    .cart-item button {
-      background: red;
-      color: white;
-      border: none;
-      padding: 6px 12px;
-      border-radius: 6px;
-      cursor: pointer;
+
+    .details {
+        flex: 1;
     }
-  </style>
+
+    .name {
+        font-size: 20px;
+        font-weight: 600;
+        margin-bottom: 6px;
+    }
+
+    .price {
+        font-size: 18px;
+        color: #a24bff;
+        margin-bottom: 8px;
+        font-weight: bold;
+    }
+
+    .qtyBox {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-top: 6px;
+    }
+
+    .qtyBtn {
+        background: #7a00e6;
+        border: none;
+        padding: 6px 12px;
+        border-radius: 8px;
+        color: white;
+        font-size: 16px;
+        cursor: pointer;
+    }
+
+    .remove {
+        color: #ff5555;
+        cursor: pointer;
+        margin-left: 10px;
+        font-size: 14px;
+    }
+
+    /* TOTAL BOX */
+    .total-box {
+        background: rgba(255,255,255,0.06);
+        border-radius: 16px;
+        padding: 20px;
+        border: 1px solid rgba(255,255,255,0.08);
+        text-align: center;
+        margin-top: 20px;
+        box-shadow: 0 0 25px rgba(122,0,230,0.3);
+    }
+
+    .total-box h2 {
+        font-size: 26px;
+        margin-bottom: 12px;
+    }
+
+    .checkout-btn {
+        padding: 14px 30px;
+        font-size: 18px;
+        background: linear-gradient(135deg, #a24bff, #7a00e6);
+        border: none;
+        border-radius: 12px;
+        color: white;
+        cursor: pointer;
+        font-weight: 600;
+        box-shadow: 0 0 25px rgba(162,75,255,0.4);
+        transition: 0.3s;
+    }
+
+    .checkout-btn:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 0 35px rgba(162,75,255,0.6);
+    }
+
+    .empty {
+        text-align: center;
+        margin-top: 50px;
+        font-size: 22px;
+        color: #ccc;
+    }
+
+</style>
 </head>
 <body>
 
-  <div class="auth-box">
-    <h2>Your Cart</h2>
-    <div id="cartItems"></div>
+<div class="container">
 
-    <h3>Total: ₹<span id="cartTotal">0</span></h3>
+    <h1>Your Cart</h1>
 
-    <button class="btn-primary" onclick="checkout()">Place Order</button>
-  </div>
+    <div id="cartList"></div>
+
+    <div id="totalBox" class="total-box" style="display:none;">
+        <h2>Total: ₹<span id="totalAmount">0</span></h2>
+        <button class="checkout-btn" onclick="checkout()">Checkout</button>
+    </div>
+
+</div>
 
 <script>
-// Load products first
 let products = [];
+let cart = JSON.parse(localStorage.getItem("mlcCart") || "[]");
 
+/* Load product data from server */
 fetch("/products")
-  .then(res => res.json())
-  .then(data => {
-      products = data;
-      loadCart();
-  });
+    .then(res => res.json())
+    .then(data => {
+        products = data;
+        renderCart();
+    });
 
-function loadCart() {
-  let cart = JSON.parse(localStorage.getItem("mlcCart")) || [];
-  const container = document.getElementById("cartItems");
-  container.innerHTML = "";
+function renderCart() {
+    const cartList = document.getElementById("cartList");
+    if (cart.length === 0) {
+        cartList.innerHTML = `<p class="empty">Your cart is empty 😔</p>`;
+        document.getElementById("totalBox").style.display = "none";
+        return;
+    }
 
-  let total = 0;
+    let total = 0;
+    cartList.innerHTML = cart.map(item => {
+        const p = products.find(pr => pr.id === item.id);
+        const itemTotal = p.price * item.qty;
+        total += itemTotal;
 
-  cart.forEach(item => {
-      const product = products.find(p => p.id === item.id);
-      if (!product) return;
+        return `
+            <div class="cart-item">
+                <img src="${p.image}" alt="${p.name}">
+                
+                <div class="details">
+                    <div class="name">${p.name}</div>
+                    <div class="price">₹${p.price}</div>
 
-      const subtotal = product.price * item.qty;
-      total += subtotal;
+                    <div class="qtyBox">
+                        <button class="qtyBtn" onclick="changeQty(${p.id}, -1)">-</button>
+                        <span>${item.qty}</span>
+                        <button class="qtyBtn" onclick="changeQty(${p.id}, 1)">+</button>
 
-      container.innerHTML += `
-        <div class="cart-item">
-          <h4>${product.name} (x${item.qty})</h4>
-          <p>₹${subtotal}</p>
-          <button onclick="removeItem(${item.id})">Remove</button>
-        </div>
-      `;
-  });
+                        <span class="remove" onclick="removeItem(${p.id})">Remove</span>
+                    </div>
+                </div>
+            </div>
+        `;
+    }).join("");
 
-  document.getElementById("cartTotal").innerText = total;
+    document.getElementById("totalAmount").innerText = total;
+    document.getElementById("totalBox").style.display = "block";
+}
+
+function changeQty(id, change) {
+    let item = cart.find(it => it.id === id);
+    if (!item) return;
+
+    item.qty += change;
+
+    if (item.qty <= 0) {
+        cart = cart.filter(it => it.id !== id);
+    }
+
+    localStorage.setItem("mlcCart", JSON.stringify(cart));
+    renderCart();
 }
 
 function removeItem(id) {
-  let cart = JSON.parse(localStorage.getItem("mlcCart")) || [];
-  cart = cart.filter(item => item.id !== id);
-  localStorage.setItem("mlcCart", JSON.stringify(cart));
-  loadCart();
+    cart = cart.filter(it => it.id !== id);
+    localStorage.setItem("mlcCart", JSON.stringify(cart));
+    renderCart();
 }
 
 function checkout() {
-    let cart = JSON.parse(localStorage.getItem("mlcCart")) || [];
-    let user = JSON.parse(localStorage.getItem("mlcUser"));
-    let total = document.getElementById("cartTotal").innerText;
+    if (cart.length === 0) return alert("Cart is empty!");
 
-    fetch("/place-order", {
-        method: "POST",
-        headers: {"Content-Type": "application/json"},
-        body: JSON.stringify({
-            email: user.email,
-            items: cart,
-            total: total
-        })
-    })
-    .then(res => res.json())
-    .then(data => {
-        alert(data.message);
-        localStorage.removeItem("mlcCart");
-        window.location.href = "dashboard.html";
-    });
+    alert("Checkout complete! (Backend integration can be added)");
+    cart = [];
+    localStorage.setItem("mlcCart", JSON.stringify(cart));
+    renderCart();
 }
-
 </script>
 
 </body>
