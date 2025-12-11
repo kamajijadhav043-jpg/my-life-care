@@ -1,41 +1,189 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Login | My Life Care</title>
-<link rel="stylesheet" href="auth.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | My Life Care</title>
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #6a11cb, #2575fc);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            width: 850px;
+            height: 500px;
+            background: white;
+            display: flex;
+            border-radius: 18px;
+            overflow: hidden;
+            box-shadow: 0 0 28px rgba(0,0,0,0.25);
+        }
+
+        /* Left side */
+        .left {
+            width: 50%;
+            padding: 60px 45px;
+        }
+
+        .left h2 {
+            font-size: 32px;
+            margin-bottom: 12px;
+        }
+
+        .left p {
+            color: #666;
+            font-size: 15px;
+            margin-bottom: 25px;
+        }
+
+        .input-box {
+            width: 100%;
+            margin-bottom: 18px;
+        }
+
+        input {
+            width: 100%;
+            padding: 14px;
+            font-size: 14px;
+            border: 1.6px solid #ccc;
+            border-radius: 8px;
+            outline: none;
+            transition: .3s;
+        }
+
+        input:focus {
+            border-color: #6a11cb;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, #6a11cb, #2575fc);
+            border: none;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: .3s;
+        }
+
+        .btn:hover {
+            opacity: 0.9;
+        }
+
+        .small-text {
+            margin-top: 15px;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        .small-text a {
+            color: #6a11cb;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        /* Right side */
+        .right {
+            width: 50%;
+            background: linear-gradient(135deg, #7b2ff7, #f107a3);
+            color: white;
+            padding: 60px 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .right h1 {
+            font-size: 38px;
+            margin-bottom: 18px;
+        }
+
+        .right p {
+            font-size: 17px;
+            line-height: 1.5;
+        }
+
+        @media (max-width: 850px) {
+            .container {
+                flex-direction: column;
+                height: auto;
+                width: 90%;
+            }
+
+            .right, .left {
+                width: 100%;
+                text-align: center;
+            }
+        }
+    </style>
+
 </head>
 <body>
 
-<div class="auth-container">
-    <div class="auth-card">
+    <div class="container">
+
         <div class="left">
-            <h2>Sign In</h2>
+            <h2>Welcome Back</h2>
+            <p>Login to your My Life Care account</p>
 
-            <div class="social-row">
-                <div class="social-btn">f</div>
-                <div class="social-btn">G</div>
-                <div class="social-btn">in</div>
-            </div>
+            <form onsubmit="loginUser(event)">
+                <div class="input-box">
+                    <input type="email" id="email" placeholder="Email Address" required>
+                </div>
 
-            <p class="light-text">or use your email</p>
+                <div class="input-box">
+                    <input type="password" id="password" placeholder="Password" required>
+                </div>
 
-            <input type="email" id="email" placeholder="Email Address">
-            <input type="password" id="password" placeholder="Password">
+                <button type="submit" class="btn">Sign In</button>
 
-            <p class="forgot">Forgot your password?</p>
-
-            <button class="btn" onclick="login()">Sign In</button>
+                <div class="small-text">
+                    Don’t have an account?
+                    <a href="register.html">Create one</a>
+                </div>
+            </form>
         </div>
 
         <div class="right">
-            <h2>Hey There!</h2>
-            <p>Begin your amazing journey by creating an account with us today.</p>
-            <a href="register.html"><button class="btn-outline">Sign Up</button></a>
+            <h1>Hello There!</h1>
+            <p>Create an account and start your amazing wellness journey with My Life Care.</p>
         </div>
-    </div>
-</div>
 
-<script src="auth.js"></script>
+    </div>
+
+    <script>
+        function loginUser(event) {
+            event.preventDefault();
+
+            const email = document.getElementById("email").value;
+            const password = document.getElementById("password").value;
+
+            fetch("/login", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ email, password })
+            })
+            .then(res => res.json())
+            .then(data => {
+                if (data.success) {
+                    alert("Login Successful!");
+                    window.location.href = "index.html";
+                } else {
+                    alert(data.message);
+                }
+            });
+        }
+    </script>
+
 </body>
 </html>
