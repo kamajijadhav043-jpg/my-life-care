@@ -1,0 +1,84 @@
+body.dark {
+    background: #000;
+    font-family: 'Poppins', sans-serif;
+    color: #fff;
+    margin: 0;
+}
+
+.auth-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.auth-card {
+    display: flex;
+    width: 800px;
+    height: 460px;
+    border-radius: 18px;
+    overflow: hidden;
+    background: #0d0d0f;
+    box-shadow: 0 0 60px #00f2ff55;
+}
+
+.left, .right {
+    width: 50%;
+    padding: 40px;
+}
+
+.neon-border {
+    border: 2px solid #00eaff;
+}
+
+.neon-gradient {
+    background: linear-gradient(135deg, #00eaff55, #0099ff88, #0011ff55);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+}
+
+.input {
+    width: 100%;
+    padding: 12px;
+    margin-top: 15px;
+    border: none;
+    border-radius: 8px;
+    background: #111;
+    color: #fff;
+    outline: none;
+}
+
+.neon-btn {
+    margin-top: 20px;
+    width: 100%;
+    padding: 14px;
+    background: #00eaff;
+    color: #000;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    box-shadow: 0 0 15px #00eaff;
+    transition: 0.3s;
+}
+
+.neon-btn:hover {
+    box-shadow: 0 0 25px #00eaff;
+}
+
+.outline-btn {
+    padding: 12px 30px;
+    background: transparent;
+    border: 2px solid #fff;
+    color: #fff;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.outline-btn:hover {
+    background: #fff;
+    color: #000;
+}
