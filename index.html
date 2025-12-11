@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
   <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>LyfeCare — Home</title>
-  <link rel="stylesheet" href="site.css">
+  <title>LyfeCare — Luxury Collection</title>
+  <link rel="stylesheet" href="lux-style.css">
 </head>
 <body>
   <header class="header">
@@ -11,9 +11,9 @@
       <div class="brand">LyfeCare</div>
       <nav class="nav">
         <a href="index.html">Home</a>
+        <a href="product.html">Shop</a>
         <a href="cart.html">Cart</a>
-        <a href="login.html">Login</a>
-        <a href="dashboard.html" class="cta">Dashboard</a>
+        <a href="dashboard.html">Account</a>
       </nav>
     </div>
   </header>
@@ -21,43 +21,90 @@
   <main class="container hero-area">
     <section class="hero">
       <div class="hero-left">
-        <h1>Your Wellness Journey Begins</h1>
-        <p>Shop trusted supplements, vitamins, skincare and wellness essentials curated for you.</p>
-        <a class="btn" href="#products">Shop Now</a>
+        <div style="display:flex;justify-content:space-between;align-items:center;">
+          <div>
+            <h1>Timeless wellness. Curated with care.</h1>
+            <p>Explore premium supplements, ritual skincare and curated wellness gifts — delivered with grace.</p>
+            <a class="cta-btn" href="#products">Explore Collection</a>
+          </div>
+          <div style="width:160px;text-align:right;">
+            <img src="https://picsum.photos/300/400?grayscale" alt="product" style="width:140px;border-radius:12px;box-shadow:0 10px 30px rgba(12,12,12,0.06)">
+          </div>
+        </div>
 
-        <div id="products" class="products" aria-live="polite"></div>
+        <div class="search-row">
+          <div class="search-box">
+            <input id="globalSearch" placeholder="Search premium supplements, skincare..." />
+          </div>
+          <div style="width:140px;display:flex;gap:8px;">
+            <button class="cta-btn" onclick="document.getElementById('globalSearch').focus()">Search</button>
+          </div>
+        </div>
+
+        <div class="cat-row" aria-hidden="false" style="margin-top:18px;">
+          <div class="cat">Vitamins</div>
+          <div class="cat">Herbal</div>
+          <div class="cat">Skincare</div>
+          <div class="cat">Gifts</div>
+          <div class="cat">Accessories</div>
+        </div>
+
+        <div id="products" class="products"></div>
       </div>
 
       <aside class="sign-card">
-        <h2>Welcome Back</h2>
-        <div class="subtitle">Login to your LyfeCare account</div>
-
-        <form onsubmit="event.preventDefault(); quickLogin()" style="margin-top:8px">
+        <h2>Member sign-in</h2>
+        <div class="subtitle">Sign in for exclusive offers & faster checkout</div>
+        <form onsubmit="event.preventDefault(); quickLogin()">
           <input id="homeEmail" type="email" placeholder="Email address" required>
           <input id="homePassword" type="password" placeholder="Password" required>
-          <button class="btn-primary" type="submit">Sign In</button>
+          <button class="cta-btn" type="submit" style="width:100%;margin-top:8px">Sign In</button>
         </form>
 
-        <div class="social-row">
-          <div class="social" onclick="location.href='/auth/google'">G</div>
-          <div class="social" onclick="location.href='/auth/facebook'">f</div>
-          <div class="social" onclick="alert('Apple login requires Apple Developer setup')"></div>
+        <div style="margin-top:12px;color:var(--muted)"><small>Or continue with</small></div>
+        <div style="display:flex;gap:10px;justify-content:center;margin-top:12px">
+          <div class="social-ico"><img src="https://cdn-icons-png.flaticon.com/512/124/124010.png" width="36" alt="G"></div>
+          <div class="social-ico"><img src="https://cdn-icons-png.flaticon.com/512/124/124010.png" width="36" alt="F"></div>
         </div>
 
-        <p style="margin-top:12px">Don't have an account? <a href="register.html">Create one</a></p>
+        <p style="margin-top:14px"><a href="register.html">Create an account</a> · <a href="forgot.html">Forgot password?</a></p>
       </aside>
+    </section>
+
+    <!-- Instagram / social gallery -->
+    <section style="margin-top:36px;text-align:center;">
+      <h2 style="font-family:Playfair Display, Georgia;color:#071028">From our Instagram</h2>
+      <p style="color:var(--muted)">Follow @jadhav_am0l for product rituals & wellness moments</p>
+      <div class="insta-grid" style="margin-top:18px">
+        <a href="https://instagram.com/jadhav_am0l" target="_blank"><img class="insta-img" src="https://picsum.photos/600/400?random=21" alt=""></a>
+        <a href="https://instagram.com/jadhav_am0l" target="_blank"><img class="insta-img" src="https://picsum.photos/600/400?random=22" alt=""></a>
+        <a href="https://instagram.com/jadhav_am0l" target="_blank"><img class="insta-img" src="https://picsum.photos/600/400?random=23" alt=""></a>
+        <a href="https://instagram.com/jadhav_am0l" target="_blank"><img class="insta-img" src="https://picsum.photos/600/400?random=24" alt=""></a>
+      </div>
     </section>
   </main>
 
   <footer class="site-footer container">
-    © 2025 LyfeCare — Made with care
+    © 2025 LyfeCare — Curated wellness  
+    <div style="margin-top:12px">
+      <a href="https://instagram.com/jadhav_am0l" target="_blank" style="margin-right:12px"><img class="social-ico" src="https://cdn-icons-png.flaticon.com/512/174/174855.png" width="28" alt="IG"></a>
+      <a href="https://wa.me/917030971315" target="_blank"><img class="social-ico" src="https://cdn-icons-png.flaticon.com/512/124/124034.png" width="28" alt="WA"></a>
+    </div>
   </footer>
 
+  <!-- Dynamic WhatsApp floating button (glow gold) -->
+  <a id="waDynamic" class="wa-float" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/124/124034.png" alt="WhatsApp"></a>
+  <script>
+    function setWhatsAppMessage(msg){ const base="https://wa.me/917030971315?text="; document.getElementById('waDynamic').href = base + encodeURIComponent(msg); }
+    setWhatsAppMessage("Hi, I need support and have a query related to LyfeCare.");
+  </script>
+
 <script>
+/* products loader — uses /products or products.json */
 let allProducts = [];
 fetch('/products').then(r=>r.json()).catch(()=>fetch('products.json').then(r=>r.json()))
 .then(data=>{ allProducts = data || []; renderProducts(allProducts.slice(0,12)); })
-.catch(()=>{ document.getElementById('products').innerHTML = '<div style="padding:20px">No products</div>'; });
+.catch(()=>{ document.getElementById('products').innerHTML = '<div style="padding:20px">No products (upload products.json)</div>'; });
 
 function renderProducts(products){
   const el = document.getElementById('products');
@@ -68,8 +115,13 @@ function renderProducts(products){
       <h3>${p.name}</h3>
       <p>${p.description || ''}</p>
       <div class="price-row">
-        <strong>₹${p.price}</strong>
-        <button class="add-btn" onclick="addToCart(${p.id})">Add</button>
+        <div>
+          <div class="price">₹${p.price}</div>
+          <div style="font-size:12px;color:var(--muted)">Free Shipping</div>
+        </div>
+        <div>
+          <button class="add-btn" onclick="addToCart(${p.id})">Add</button>
+        </div>
       </div>
     </div>
   `).join('');
@@ -78,20 +130,16 @@ function renderProducts(products){
 function addToCart(id){
   let cart = JSON.parse(localStorage.getItem('mlcCart')||'[]');
   let item = cart.find(i=>i.id===id);
-  if(item) item.qty++;
-  else cart.push({id,qty:1});
+  if(item) item.qty++; else cart.push({id,qty:1});
   localStorage.setItem('mlcCart',JSON.stringify(cart));
   alert('Added to cart');
 }
 
 function quickLogin(){
-  const email = document.getElementById('homeEmail').value;
-  const password = document.getElementById('homePassword').value;
+  const email=document.getElementById('homeEmail').value, password=document.getElementById('homePassword').value;
   fetch('/login',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email,password})})
-    .then(r=>r.json()).then(data=>{
-      alert(data.message || 'Response');
-      if(data.success){ localStorage.setItem('mlcUser', JSON.stringify(data.user)); location.href='dashboard.html' }
-    }).catch(()=>alert('Server error'));
+    .then(r=>r.json()).then(data=>{ alert(data.message||'Logged'); if(data.success){ localStorage.setItem('mlcUser', JSON.stringify(data.user)); location.href='dashboard.html' }})
+    .catch(()=>alert('Server error'));
 }
 </script>
 </body>
