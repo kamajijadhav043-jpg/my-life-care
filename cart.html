@@ -1,231 +1,49 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<title>Cart | LyfeCare</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<style>
-    body {
-        margin: 0;
-        font-family: "Poppins", sans-serif;
-        background: radial-gradient(circle at top left, rgba(162,75,255,0.25), transparent 60%),
-                    radial-gradient(circle at bottom right, rgba(122,0,230,0.25), transparent 60%),
-                    #050306;
-        color: #eee;
-        padding: 20px;
-    }
-
-    .container {
-        max-width: 900px;
-        margin: auto;
-    }
-
-    h1 {
-        text-align: center;
-        margin-bottom: 25px;
-        font-size: 34px;
-        color: #a24bff;
-    }
-
-    .cart-item {
-        background: rgba(255,255,255,0.05);
-        padding: 18px;
-        border-radius: 16px;
-        margin-bottom: 18px;
-        border: 1px solid rgba(255,255,255,0.07);
-        box-shadow: 0 0 25px rgba(162,75,255,0.25);
-        display: flex;
-        align-items: center;
-        gap: 18px;
-    }
-
-    .cart-item img {
-        width: 110px;
-        height: 110px;
-        border-radius: 12px;
-        object-fit: cover;
-        border: 1px solid rgba(255,255,255,0.08);
-    }
-
-    .details {
-        flex: 1;
-    }
-
-    .name {
-        font-size: 20px;
-        font-weight: 600;
-        margin-bottom: 6px;
-    }
-
-    .price {
-        font-size: 18px;
-        color: #a24bff;
-        margin-bottom: 8px;
-        font-weight: bold;
-    }
-
-    .qtyBox {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        margin-top: 6px;
-    }
-
-    .qtyBtn {
-        background: #7a00e6;
-        border: none;
-        padding: 6px 12px;
-        border-radius: 8px;
-        color: white;
-        font-size: 16px;
-        cursor: pointer;
-    }
-
-    .remove {
-        color: #ff5555;
-        cursor: pointer;
-        margin-left: 10px;
-        font-size: 14px;
-    }
-
-    /* TOTAL BOX */
-    .total-box {
-        background: rgba(255,255,255,0.06);
-        border-radius: 16px;
-        padding: 20px;
-        border: 1px solid rgba(255,255,255,0.08);
-        text-align: center;
-        margin-top: 20px;
-        box-shadow: 0 0 25px rgba(122,0,230,0.3);
-    }
-
-    .total-box h2 {
-        font-size: 26px;
-        margin-bottom: 12px;
-    }
-
-    .checkout-btn {
-        padding: 14px 30px;
-        font-size: 18px;
-        background: linear-gradient(135deg, #a24bff, #7a00e6);
-        border: none;
-        border-radius: 12px;
-        color: white;
-        cursor: pointer;
-        font-weight: 600;
-        box-shadow: 0 0 25px rgba(162,75,255,0.4);
-        transition: 0.3s;
-    }
-
-    .checkout-btn:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 0 35px rgba(162,75,255,0.6);
-    }
-
-    .empty {
-        text-align: center;
-        margin-top: 50px;
-        font-size: 22px;
-        color: #ccc;
-    }
-
-</style>
-</head>
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Cart — My Life Care</title><link rel="stylesheet" href="site.css"></head>
 <body>
+<header class="header"><div class="wrap container"><div class="brand">My Life Care</div></div></header>
 
-<div class="container">
+<main class="container" style="padding:30px 0">
+  <h2>Your Cart</h2>
+  <div id="cart" class="cart-list" style="margin-top:12px"></div>
+  <div style="margin-top:18px">
+    <button onclick="checkout()" class="btn">Checkout</button>
+  </div>
+</main>
 
-    <h1>Your Cart</h1>
-
-    <div id="cartList"></div>
-
-    <div id="totalBox" class="total-box" style="display:none;">
-        <h2>Total: ₹<span id="totalAmount">0</span></h2>
-        <button class="checkout-btn" onclick="checkout()">Checkout</button>
-    </div>
-
-</div>
+<footer class="site-footer container">© 2025 My Life Care</footer>
 
 <script>
-let products = [];
-let cart = JSON.parse(localStorage.getItem("mlcCart") || "[]");
-
-/* Load product data from server */
-fetch("/products")
-    .then(res => res.json())
-    .then(data => {
-        products = data;
-        renderCart();
-    });
-
-function renderCart() {
-    const cartList = document.getElementById("cartList");
-    if (cart.length === 0) {
-        cartList.innerHTML = `<p class="empty">Your cart is empty 😔</p>`;
-        document.getElementById("totalBox").style.display = "none";
-        return;
-    }
-
-    let total = 0;
-    cartList.innerHTML = cart.map(item => {
-        const p = products.find(pr => pr.id === item.id);
-        const itemTotal = p.price * item.qty;
-        total += itemTotal;
-
-        return `
-            <div class="cart-item">
-                <img src="${p.image}" alt="${p.name}">
-                
-                <div class="details">
-                    <div class="name">${p.name}</div>
-                    <div class="price">₹${p.price}</div>
-
-                    <div class="qtyBox">
-                        <button class="qtyBtn" onclick="changeQty(${p.id}, -1)">-</button>
-                        <span>${item.qty}</span>
-                        <button class="qtyBtn" onclick="changeQty(${p.id}, 1)">+</button>
-
-                        <span class="remove" onclick="removeItem(${p.id})">Remove</span>
-                    </div>
-                </div>
-            </div>
-        `;
-    }).join("");
-
-    document.getElementById("totalAmount").innerText = total;
-    document.getElementById("totalBox").style.display = "block";
+async function loadProducts(){
+  try{
+    const list = await fetch('/products').then(r=>r.json()).catch(()=>fetch('products.json').then(r=>r.json()));
+    return list||[];
+  }catch(e){return []}
 }
 
-function changeQty(id, change) {
-    let item = cart.find(it => it.id === id);
-    if (!item) return;
-
-    item.qty += change;
-
-    if (item.qty <= 0) {
-        cart = cart.filter(it => it.id !== id);
-    }
-
-    localStorage.setItem("mlcCart", JSON.stringify(cart));
-    renderCart();
+async function renderCart(){
+  const cart = JSON.parse(localStorage.getItem('mlcCart')||'[]');
+  const products = await loadProducts();
+  const el = document.getElementById('cart');
+  if(cart.length===0){ el.innerHTML = '<div style="padding:20px;background:#fff;border-radius:12px">Your cart is empty</div>'; return; }
+  el.innerHTML = cart.map(ci=>{
+    const p = products.find(x=>x.id===ci.id) || {};
+    return `<div class="cart-item">
+      <img src="${p.image||'product1.jpg'}" style="width:84px;height:84px;border-radius:10px;object-fit:cover">
+      <div style="flex:1">
+        <strong>${p.name||'Product'}</strong>
+        <div style="color:var(--muted)">${p.description || ''}</div>
+      </div>
+      <div style="text-align:right">
+        <div>₹${p.price || 0}</div>
+        <div>Qty: ${ci.qty}</div>
+      </div>
+    </div>`;
+  }).join('');
 }
+renderCart();
 
-function removeItem(id) {
-    cart = cart.filter(it => it.id !== id);
-    localStorage.setItem("mlcCart", JSON.stringify(cart));
-    renderCart();
-}
-
-function checkout() {
-    if (cart.length === 0) return alert("Cart is empty!");
-
-    alert("Checkout complete! (Backend integration can be added)");
-    cart = [];
-    localStorage.setItem("mlcCart", JSON.stringify(cart));
-    renderCart();
-}
+function checkout(){ alert('Proceed to payment - implement server checkout'); }
 </script>
-
-</body>
-</html>
+</body></html>

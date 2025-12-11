@@ -1,145 +1,43 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-<meta charset="UTF-8">
-<title>Register | My Life Care</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<style>
-    body {
-        margin: 0;
-        font-family: 'Poppins', sans-serif;
-        background: radial-gradient(circle at top left, rgba(162,75,255,0.25), transparent 60%),
-                    radial-gradient(circle at bottom right, rgba(122,0,230,0.25), transparent 60%),
-                    #050306;
-        height: 100vh;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        color: #fff;
-    }
-
-    .card {
-        width: 420px;
-        padding: 35px;
-        border-radius: 20px;
-        background: rgba(255, 255, 255, 0.06);
-        backdrop-filter: blur(12px);
-        box-shadow: 0 0 35px rgba(162,75,255,0.2);
-        border: 1px solid rgba(255,255,255,0.08);
-        text-align: center;
-        animation: fade 0.8s ease;
-    }
-
-    @keyframes fade {
-        from { opacity: 0; transform: scale(0.92); }
-        to { opacity: 1; transform: scale(1); }
-    }
-
-    h2 {
-        margin-bottom: 10px;
-        font-size: 28px;
-        font-weight: 700;
-    }
-
-    p {
-        margin-bottom: 18px;
-        color: #c7c7c7;
-    }
-
-    input {
-        width: 100%;
-        padding: 14px;
-        border: none;
-        border-radius: 12px;
-        margin: 10px 0;
-        background: #0d0d12;
-        color: #fff;
-        font-size: 15px;
-        border: 1px solid rgba(162,75,255,0.25);
-        transition: 0.3s;
-    }
-
-    input:focus {
-        border-color: #a24bff;
-        box-shadow: 0 0 12px rgba(162,75,255,0.45);
-        outline: none;
-    }
-
-    .btn {
-        width: 100%;
-        padding: 14px;
-        margin-top: 12px;
-        font-size: 16px;
-        border: none;
-        border-radius: 12px;
-        cursor: pointer;
-        font-weight: bold;
-        background: linear-gradient(90deg, #a24bff, #7a00e6);
-        color: #fff;
-        box-shadow: 0 0 20px rgba(122,0,230,0.25);
-    }
-
-    .btn:hover {
-        box-shadow: 0 0 26px rgba(122,0,230,0.45);
-        transform: translateY(-2px);
-    }
-
-    .login-link {
-        margin-top: 16px;
-        color: #c7c7c7;
-    }
-
-    .login-link a {
-        color: #a24bff;
-        font-weight: 600;
-        text-decoration: none;
-    }
-</style>
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Register — My Life Care</title>
+  <link rel="stylesheet" href="site.css">
 </head>
 <body>
+  <header class="header"><div class="wrap container"><div class="brand">My Life Care</div></div></header>
+  <main class="container hero-area">
+    <section style="display:grid;grid-template-columns:1fr 420px;gap:30px;align-items:center">
+      <div class="hero-left">
+        <h1>Create Your Account</h1>
+        <p>Join My Life Care for exclusive offers, order tracking and faster checkout.</p>
+      </div>
 
-<div class="card">
-    <h2>Create Account</h2>
-    <p>Join My Life Care and begin your wellness journey</p>
-
-    <input type="text" id="name" placeholder="Full Name" required>
-    <input type="email" id="email" placeholder="Email Address" required>
-    <input type="password" id="password" placeholder="Password" required>
-
-    <button class="btn" onclick="registerUser()">Create Account</button>
-
-    <div class="login-link">
-        Already have an account?
-        <a href="login.html">Sign In</a>
-    </div>
-</div>
+      <aside class="sign-card">
+        <h2>Sign Up</h2>
+        <form id="regForm" onsubmit="event.preventDefault(); doRegister()">
+          <input id="rname" placeholder="Full name" required>
+          <input id="remail" type="email" placeholder="Email address" required>
+          <input id="rpassword" type="password" placeholder="Password" required>
+          <button class="btn-primary" type="submit">Create account</button>
+        </form>
+        <p style="margin-top:10px;text-align:center">Already a member? <a href="login.html">Login</a></p>
+      </aside>
+    </section>
+  </main>
+  <footer class="site-footer container">© 2025 My Life Care</footer>
 
 <script>
-function registerUser() {
-    const name = document.getElementById("name").value.trim();
-    const email = document.getElementById("email").value.trim();
-    const password = document.getElementById("password").value.trim();
-
-    if (!name || !email || !password) {
-        alert("All fields are required.");
-        return;
-    }
-
-    fetch("/register", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, email, password })
-    })
-    .then(res => res.json())
-    .then(data => {
-        alert(data.message);
-        if (data.success) {
-            window.location.href = "login.html";
-        }
-    })
-    .catch(() => alert("Server error."));
+function doRegister(){
+  const name=document.getElementById('rname').value;
+  const email=document.getElementById('remail').value;
+  const password=document.getElementById('rpassword').value;
+  fetch('/register',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name,email,password})})
+    .then(r=>r.json()).then(data=>{
+      alert(data.message || 'Registered');
+      if(data.success) window.location='login.html';
+    }).catch(()=>alert('Server error'));
 }
 </script>
-
 </body>
 </html>

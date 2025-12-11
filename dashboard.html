@@ -1,246 +1,38 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<title>Dashboard | LyfeCare</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<style>
-    body {
-        margin: 0;
-        font-family: "Poppins", sans-serif;
-        background: #050306;
-        color: #eee;
-        display: flex;
-        height: 100vh;
-        overflow: hidden;
-    }
-
-    /* SIDEBAR */
-    .sidebar {
-        width: 240px;
-        background: rgba(255,255,255,0.04);
-        backdrop-filter: blur(12px);
-        border-right: 1px solid rgba(255,255,255,0.05);
-        display: flex;
-        flex-direction: column;
-        padding: 25px 20px;
-    }
-
-    .brand {
-        font-size: 24px;
-        font-weight: 700;
-        color: #a24bff;
-        margin-bottom: 25px;
-    }
-
-    .menu a {
-        color: #bbb;
-        text-decoration: none;
-        padding: 12px 14px;
-        display: block;
-        border-radius: 10px;
-        margin-bottom: 5px;
-        transition: .2s;
-    }
-
-    .menu a:hover,
-    .menu a.active {
-        background: rgba(162,75,255,0.25);
-        color: #fff;
-    }
-
-    /* MAIN AREA */
-    .main {
-        flex: 1;
-        padding: 25px;
-        overflow-y: auto;
-    }
-
-    h1 {
-        margin-bottom: 10px;
-    }
-
-    /* USER CARD */
-    .user-card {
-        background: rgba(255,255,255,0.05);
-        border: 1px solid rgba(255,255,255,0.1);
-        padding: 20px;
-        border-radius: 14px;
-        margin-bottom: 20px;
-        box-shadow: 0 0 25px rgba(162,75,255,0.2);
-    }
-
-    /* STATS GRID */
-    .stats-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-        gap: 20px;
-    }
-
-    .stat-box {
-        background: rgba(255,255,255,0.05);
-        padding: 22px;
-        border-radius: 14px;
-        border: 1px solid rgba(255,255,255,0.08);
-        text-align: center;
-        box-shadow: 0 0 20px rgba(122,0,230,0.18);
-    }
-
-    .stat-box h2 {
-        font-size: 32px;
-        margin-bottom: 5px;
-        color: #a24bff;
-    }
-
-    .stat-box p {
-        color: #ccc;
-    }
-
-    /* ORDERS TABLE */
-    .table-box {
-        margin-top: 30px;
-        background: rgba(255,255,255,0.05);
-        padding: 20px;
-        border-radius: 16px;
-        border: 1px solid rgba(255,255,255,0.05);
-        box-shadow: 0 0 25px rgba(162,75,255,0.2);
-    }
-
-    table {
-        width: 100%;
-        border-collapse: collapse;
-    }
-
-    th, td {
-        padding: 12px;
-        border-bottom: 1px solid rgba(255,255,255,0.08);
-        text-align: left;
-    }
-
-    th {
-        color: #a24bff;
-        font-weight: 600;
-    }
-
-    .logout-btn {
-        margin-top: 16px;
-        padding: 10px 18px;
-        background: linear-gradient(135deg, #7a00e6, #a24bff);
-        border: none;
-        color: white;
-        border-radius: 10px;
-        cursor: pointer;
-        font-weight: 600;
-        box-shadow: 0 0 22px rgba(162,75,255,0.35);
-    }
-</style>
-</head>
-
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Dashboard — My Life Care</title><link rel="stylesheet" href="site.css"></head>
 <body>
+<header class="header"><div class="wrap container"><div class="brand">My Life Care</div></div></header>
 
-<!-- SIDEBAR -->
-<div class="sidebar">
-    <div class="brand">LyfeCare</div>
+<main class="container" style="padding:28px 0">
+  <h2>Dashboard</h2>
+  <div id="welcome" style="margin-top:12px"></div>
+  <div style="margin-top:18px" id="adminOrders"></div>
+</main>
 
-    <div class="menu">
-        <a href="#" class="active">Dashboard</a>
-        <a href="index.html">Go to Store</a>
-        <a href="cart.html">Cart</a>
-        <a href="login.html">Logout</a>
-    </div>
-</div>
-
-<!-- MAIN AREA -->
-<div class="main">
-
-    <h1>Dashboard</h1>
-
-    <!-- USER INFO -->
-    <div class="user-card" id="userInfo">Loading user...</div>
-
-    <!-- STATS -->
-    <div class="stats-grid">
-        <div class="stat-box">
-            <h2 id="totalOrders">0</h2>
-            <p>Total Orders</p>
-        </div>
-
-        <div class="stat-box">
-            <h2 id="totalSpent">₹0</h2>
-            <p>Total Spent</p>
-        </div>
-
-        <div class="stat-box">
-            <h2 id="totalItems">0</h2>
-            <p>Items Ordered</p>
-        </div>
-    </div>
-
-    <!-- ORDERS TABLE -->
-    <div class="table-box">
-        <h2 style="margin-bottom:10px;">Your Orders</h2>
-        <div id="ordersList">Loading...</div>
-    </div>
-</div>
+<footer class="site-footer container">© 2025 My Life Care</footer>
 
 <script>
-/* Load user info */
-const user = JSON.parse(localStorage.getItem("mlcUser"));
+const user = JSON.parse(localStorage.getItem('mlcUser') || 'null');
+if(!user){ alert('Please login'); location.href='login.html' }
+document.getElementById('welcome').innerHTML = <strong>Welcome, ${user.name||user.email}</strong>;
 
-if (!user) {
-    document.getElementById("userInfo").innerHTML = "Not logged in.";
-} else {
-    document.getElementById("userInfo").innerHTML = `
-        <strong>Name:</strong> ${user.name || "User"}<br>
-        <strong>Email:</strong> ${user.email}
-    `;
+function loadAllOrders(){
+  fetch('/all-orders').then(r=>r.json()).then(data=>{
+    const el = document.getElementById('adminOrders');
+    if(!data || data.length===0) return el.innerHTML='<div class="sign-card">No orders yet.</div>';
+    el.innerHTML = data.map(o=>`<div style='margin-bottom:12px;padding:12px;background:#fff;border-radius:10px;box-shadow:var(--shadow)'>
+      <strong>Order ${o.id}</strong><br>
+      Email: ${o.email}<br>
+      Total: ₹${o.total}<br>
+      Items: ${o.items.length}
+    </div>`).join('');
+  }).catch(()=>document.getElementById('adminOrders').innerHTML='<div class="sign-card">Unable to load orders</div>');
 }
 
-/* Load orders */
-fetch("/my-orders")
-    .then(res => res.json())
-    .then(data => {
-        if (!data.length) {
-            document.getElementById("ordersList").innerHTML = "<p>No orders found.</p>";
-            return;
-        }
-
-        let totalSpent = 0;
-        let totalItems = 0;
-
-        let table = `
-            <table>
-                <tr>
-                    <th>Order ID</th>
-                    <th>Total</th>
-                    <th>Date</th>
-                    <th>Items</th>
-                </tr>
-        `;
-
-        data.forEach(o => {
-            totalSpent += o.total;
-            totalItems += o.items.length;
-
-            table += `
-                <tr>
-                    <td>${o.id}</td>
-                    <td>₹${o.total}</td>
-                    <td>${o.date}</td>
-                    <td>${o.items.length}</td>
-                </tr>
-            `;
-        });
-
-        table += "</table>";
-        document.getElementById("ordersList").innerHTML = table;
-
-        document.getElementById("totalOrders").innerText = data.length;
-        document.getElementById("totalSpent").innerText = "₹" + totalSpent;
-        document.getElementById("totalItems").innerText = totalItems;
-    });
+// auto load if admin: (you can add user.isAdmin on server)
+if(user && user.isAdmin){ loadAllOrders() } else {
+  document.getElementById('adminOrders').innerHTML = '<div class="sign-card">Orders are visible to admins only.</div>'
+}
 </script>
-
-</body>
-</html>
+</body></html>

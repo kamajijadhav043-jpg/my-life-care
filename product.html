@@ -1,166 +1,37 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<title>Product | LyfeCare</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<style>
-    body {
-        margin: 0;
-        font-family: 'Poppins', sans-serif;
-        background: radial-gradient(circle at top left, rgba(162,75,255,0.25), transparent 60%),
-                    radial-gradient(circle at bottom right, rgba(122,0,230,0.25), transparent 60%),
-                    #050306;
-        color: #eee;
-    }
-
-    .container {
-        max-width: 1100px;
-        margin: 40px auto;
-        padding: 20px;
-        display: flex;
-        gap: 40px;
-        align-items: flex-start;
-    }
-
-    .product-img {
-        width: 420px;
-        height: 420px;
-        object-fit: cover;
-        border-radius: 20px;
-        box-shadow: 0 0 35px rgba(162,75,255,0.25);
-        border: 1px solid rgba(255,255,255,0.08);
-    }
-
-    .product-info {
-        flex: 1;
-    }
-
-    h1 {
-        font-size: 34px;
-        margin-bottom: 10px;
-    }
-
-    .price {
-        font-size: 28px;
-        font-weight: bold;
-        color: #a24bff;
-        margin-bottom: 15px;
-    }
-
-    .desc {
-        font-size: 16px;
-        color: #ccc;
-        line-height: 1.6;
-        margin-bottom: 20px;
-    }
-
-    .qty-box {
-        margin: 20px 0;
-    }
-
-    select {
-        padding: 10px 14px;
-        border-radius: 10px;
-        border: none;
-        outline: none;
-        background: rgba(255,255,255,0.08);
-        color: #fff;
-        font-size: 16px;
-    }
-
-    .add-btn {
-        padding: 14px 30px;
-        border: none;
-        border-radius: 12px;
-        font-size: 18px;
-        font-weight: 600;
-        background: linear-gradient(135deg, #a24bff, #7a00e6);
-        color: #fff;
-        box-shadow: 0 10px 25px rgba(162,75,255,0.35);
-        cursor: pointer;
-        transition: .3s;
-    }
-
-    .add-btn:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 14px 30px rgba(162,75,255,0.5);
-    }
-
-    @media(max-width: 800px) {
-        .container {
-            flex-direction: column;
-            text-align: center;
-        }
-
-        .product-img {
-            width: 90%;
-            height: auto;
-        }
-    }
-</style>
-
-</head>
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Product — My Life Care</title><link rel="stylesheet" href="site.css"></head>
 <body>
+  <header class="header"><div class="wrap container"><div class="brand">My Life Care</div></div></header>
 
-<div class="container">
-    <img id="productImage" class="product-img">
-
-    <div class="product-info">
-        <h1 id="productName">Loading...</h1>
-        <div class="price" id="productPrice"></div>
-        <p class="desc" id="productDesc"></p>
-
-        <div class="qty-box">
-            <label>Quantity:</label>
-            <select id="qtySelect">
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-            </select>
-        </div>
-
-        <button class="add-btn" onclick="addToCart()">Add to Cart</button>
+  <main class="container product-detail" id="main">
+    <div class="img"><img id="pimg" src="product1.jpg" alt="" style="width:100%;border-radius:14px"></div>
+    <div class="info">
+      <h1 id="pname">Product name</h1>
+      <p id="pdesc" style="color:var(--muted)"></p>
+      <strong id="pprice" style="font-size:20px;color:var(--accent)"></strong>
+      <div style="margin-top:18px">
+        <button class="add-btn" onclick="addToCart(currentId)">Add to cart</button>
+      </div>
     </div>
-</div>
+  </main>
+
+  <footer class="site-footer container">© 2025 My Life Care</footer>
 
 <script>
-let product = {};
+let currentId = null;
+function qs(k){const u=new URL(location.href); return u.searchParams.get(k)}
+const id = qs('id') || '1';
+fetch('/products').then(r=>r.json()).catch(()=>fetch('products.json').then(r=>r.json())).then(list=>{
+  const p = (list||[]).find(x=>String(x.id)===String(id)) || list[0];
+  if(!p) return;
+  currentId = p.id;
+  document.getElementById('pimg').src = p.image || 'product1.jpg';
+  document.getElementById('pname').textContent = p.name;
+  document.getElementById('pdesc').textContent = p.description || '';
+  document.getElementById('pprice').textContent = '₹' + p.price;
+});
 
-function loadProduct() {
-    const urlParams = new URLSearchParams(window.location.search);
-    const id = urlParams.get("id");
-
-    fetch("/products")
-        .then(res => res.json())
-        .then(data => {
-            product = data.find(p => p.id == id);
-
-            if (!product) return;
-
-            document.getElementById("productImage").src = product.image;
-            document.getElementById("productName").innerText = product.name;
-            document.getElementById("productPrice").innerText = "₹" + product.price;
-            document.getElementById("productDesc").innerText = product.description;
-        });
-}
-
-function addToCart() {
-    const qty = Number(document.getElementById("qtySelect").value);
-
-    let cart = JSON.parse(localStorage.getItem("mlcCart") || "[]");
-    let existing = cart.find(item => item.id == product.id);
-
-    if (existing) existing.qty += qty;
-    else cart.push({ id: product.id, qty });
-
-    localStorage.setItem("mlcCart", JSON.stringify(cart));
-    alert("Added to cart!");
-}
-
-loadProduct();
+function addToCart(id){ let cart=JSON.parse(localStorage.getItem('mlcCart')||'[]'); let it=cart.find(i=>i.id===id); if(it) it.qty++; else cart.push({id,qty:1}); localStorage.setItem('mlcCart',JSON.stringify(cart)); alert('Added to cart') }
 </script>
-
-</body>
-</html>
+</body></html>

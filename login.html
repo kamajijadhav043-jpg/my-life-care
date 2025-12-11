@@ -1,189 +1,60 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login | My Life Care</title>
-
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: 'Poppins', sans-serif;
-            background: linear-gradient(135deg, #6a11cb, #2575fc);
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .container {
-            width: 850px;
-            height: 500px;
-            background: white;
-            display: flex;
-            border-radius: 18px;
-            overflow: hidden;
-            box-shadow: 0 0 28px rgba(0,0,0,0.25);
-        }
-
-        /* Left side */
-        .left {
-            width: 50%;
-            padding: 60px 45px;
-        }
-
-        .left h2 {
-            font-size: 32px;
-            margin-bottom: 12px;
-        }
-
-        .left p {
-            color: #666;
-            font-size: 15px;
-            margin-bottom: 25px;
-        }
-
-        .input-box {
-            width: 100%;
-            margin-bottom: 18px;
-        }
-
-        input {
-            width: 100%;
-            padding: 14px;
-            font-size: 14px;
-            border: 1.6px solid #ccc;
-            border-radius: 8px;
-            outline: none;
-            transition: .3s;
-        }
-
-        input:focus {
-            border-color: #6a11cb;
-        }
-
-        .btn {
-            width: 100%;
-            padding: 14px;
-            background: linear-gradient(135deg, #6a11cb, #2575fc);
-            border: none;
-            color: white;
-            font-size: 16px;
-            font-weight: bold;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: .3s;
-        }
-
-        .btn:hover {
-            opacity: 0.9;
-        }
-
-        .small-text {
-            margin-top: 15px;
-            text-align: center;
-            font-size: 14px;
-        }
-
-        .small-text a {
-            color: #6a11cb;
-            text-decoration: none;
-            font-weight: 600;
-        }
-
-        /* Right side */
-        .right {
-            width: 50%;
-            background: linear-gradient(135deg, #7b2ff7, #f107a3);
-            color: white;
-            padding: 60px 40px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-
-        .right h1 {
-            font-size: 38px;
-            margin-bottom: 18px;
-        }
-
-        .right p {
-            font-size: 17px;
-            line-height: 1.5;
-        }
-
-        @media (max-width: 850px) {
-            .container {
-                flex-direction: column;
-                height: auto;
-                width: 90%;
-            }
-
-            .right, .left {
-                width: 100%;
-                text-align: center;
-            }
-        }
-    </style>
-
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Login — My Life Care</title>
+  <link rel="stylesheet" href="site.css">
 </head>
 <body>
-
-    <div class="container">
-
-        <div class="left">
-            <h2>Welcome Back</h2>
-            <p>Login to your My Life Care account</p>
-
-            <form onsubmit="loginUser(event)">
-                <div class="input-box">
-                    <input type="email" id="email" placeholder="Email Address" required>
-                </div>
-
-                <div class="input-box">
-                    <input type="password" id="password" placeholder="Password" required>
-                </div>
-
-                <button type="submit" class="btn">Sign In</button>
-
-                <div class="small-text">
-                    Don’t have an account?
-                    <a href="register.html">Create one</a>
-                </div>
-            </form>
-        </div>
-
-        <div class="right">
-            <h1>Hello There!</h1>
-            <p>Create an account and start your amazing wellness journey with My Life Care.</p>
-        </div>
-
+  <header class="header">
+    <div class="wrap container">
+      <div class="brand">My Life Care</div>
     </div>
+  </header>
 
-    <script>
-        function loginUser(event) {
-            event.preventDefault();
+  <main class="container hero-area">
+    <section class="hero" style="grid-template-columns: 520px 1fr; gap:40px;">
+      <div class="sign-card" style="text-align:left;">
+        <h2>Welcome Back</h2>
+        <div class="subtitle">Login to your My Life Care account</div>
 
-            const email = document.getElementById("email").value;
-            const password = document.getElementById("password").value;
+        <form id="loginForm" onsubmit="event.preventDefault(); doLogin()">
+          <input id="email" type="email" placeholder="Email address" required>
+          <input id="password" type="password" placeholder="Password" required>
+          <button class="btn-primary" type="submit">Sign In</button>
+        </form>
 
-            fetch("/login", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ email, password })
-            })
-            .then(res => res.json())
-            .then(data => {
-                if (data.success) {
-                    alert("Login Successful!");
-                    window.location.href = "index.html";
-                } else {
-                    alert(data.message);
-                }
-            });
-        }
-    </script>
+        <p style="margin-top:10px;text-align:center" class="small">Or sign in with</p>
+        <div class="social-row">
+          <div class="social" onclick="social('google')">G</div>
+          <div class="social" onclick="social('facebook')">f</div>
+          <div class="social" onclick="social('apple')"></div>
+        </div>
 
+        <p style="margin-top:12px;text-align:center">Don’t have an account? <a href="register.html">Create one</a></p>
+      </div>
+
+      <div class="hero-left" style="text-align:left;">
+        <h1>Hey There!</h1>
+        <p>Begin your amazing journey by creating an account with us today. Personalized recommendations, fast checkout & trusted wellness products.</p>
+        <a class="btn" href="register.html">Sign Up</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer container">© 2025 My Life Care</footer>
+
+<script>
+function doLogin(){
+  const email = document.getElementById('email').value;
+  const password = document.getElementById('password').value;
+  fetch('/login',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email,password})})
+    .then(r=>r.json()).then(data=>{
+      alert(data.message || 'Logged in');
+      if(data.success){ localStorage.setItem('mlcUser', JSON.stringify(data.user)); window.location='dashboard.html' }
+    }).catch(()=>alert('Server error'));
+}
+function social(p){ alert('Social auth: '+p + ' — configure OAuth on server'); }
+</script>
 </body>
 </html>
