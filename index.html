@@ -1,116 +1,238 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>My Life Care | Home</title>
+  <meta charset="utf-8" />
+  <title>My Life Care — Luxury Wellness</title>
+
+  <!-- Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <!-- Main stylesheet -->
   <link rel="stylesheet" href="style.css">
+
+  <meta name="description" content="LyfeCare — premium wellness, herbal & skincare products.">
+  <meta property="og:title" content="LyfeCare Store">
+  <meta property="og:description" content="Premium wellness products curated for your health.">
+  <meta property="og:url" content="https://lyfecare.store">
 </head>
-<body>
+<body class="dark">
 
-<!-- MOBILE MENU BUTTON (shown on mobile) -->
-<div class="mobile-menu-btn" onclick="toggleMenu()">☰</div>
+  <!-- NAVBAR -->
+  <header class="navbar">
+    <div class="nav-left">
+      <div class="logo">LyfeCare</div>
+    </div>
 
-<!-- NAVBAR -->
-<div class="navbar">
-  <div class="logo">My Life Care</div>
-  <div class="nav-links" id="mobileMenu">
-    <a href="index.html">Home</a>
-    <a href="cart.html">Cart</a>
-    <a href="login.html">Login</a>
-    <a href="dashboard.html">Dashboard</a>
-    <a href="https://instagram.com/jadhav_am0l" target="_blank"></a>
-      instagram 
-      
-  </div>
-</div>
+    <div class="nav-right">
+      <nav class="nav-links" id="navLinks">
+        <a href="index.html">Home</a>
+        <a href="cart.html">Cart</a>
+        <a href="login.html">Login</a>
+        <a href="dashboard.html">Dashboard</a>
+        <a href="https://instagram.com/jadhav_am0l" target="_blank" class="insta">Instagram</a>
+      </nav>
 
-<!-- HERO SECTION -->
-<div class="hero">
-  <h1>Your Wellness Journey Begins Here 🌿</h1>
-  <p>Quality wellness products for a healthier and happier lifestyle.</p>
-  <button onclick="document.getElementById('productList').scrollIntoView({behavior:'smooth'})">
-    Shop Now
-  </button>
-</div>
+      <button class="hamb" id="hambBtn" aria-label="menu">☰</button>
+    </div>
+  </header>
 
-<!-- PRODUCTS SECTION -->
-<h2 style="text-align:center; margin-top:40px;">Our Products</h2>
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-inner">
+      <div class="hero-copy">
+        <h1><span class="accent">LyfeCare</span> — Premium Supplements & Wellness</h1>
+        <p class="lead">Curated herbal blends, vitamins, and skincare — crafted for modern living.</p>
 
-<!-- SEARCH BAR -->
-<div style="text-align:center; margin:20px;">
-  <input 
-    type="text" 
-    id="searchInput" 
-    placeholder="Search products..." 
-    style="padding:10px; width:60%; font-size:16px; border-radius:8px; border:1px solid #ccc;"
-    onkeyup="searchProducts()"
-  >
-</div>
+        <div class="hero-cta">
+          <a href="#productList" class="btn primary">Shop Now</a>
+          <a href="register.html" class="btn outline">Create Account</a>
+        </div>
+      </div>
 
-<div id="productList"></div>
+      <div class="hero-art">
+        <!-- subtle glowing graphic -->
+        <div class="orb"></div>
+      </div>
+    </div>
 
-<!-- FOOTER -->
-<!-- FOOTER -->
-<div class="footer">
-  © 2025 My Life Care — Designed with ❤️ for Wellness
-  <br>
-  Follow us on 
-  <a href="https://instagram.com/jadhav_am0l" target="_blank">
-    Instagram
-  </a>
-</div>
+    <!-- STATS -->
+    <div class="stats-strip">
+      <div class="stat">✨ <strong>1000+</strong> Premium Products</div>
+      <div class="stat">🏆 <strong>10,000+</strong> Happy Customers</div>
+      <div class="stat">🔒 <strong>100%</strong> Secure Checkout</div>
+    </div>
+  </section>
+
+  <!-- SEARCH + CATEGORIES -->
+  <main>
+    <div class="search-wrap">
+      <input id="searchInput" class="search-bar" placeholder="Search for products, vitamins, herbal packs..." onkeyup="searchProducts()">
+    </div>
+
+    <div class="category-tabs" id="categoryTabs">
+      <button class="cat-pill active" onclick="filterCategory('all')">All</button>
+      <button class="cat-pill" onclick="filterCategory('Herbal')">Herbal</button>
+      <button class="cat-pill" onclick="filterCategory('Vitamins')">Vitamins</button>
+      <button class="cat-pill" onclick="filterCategory('Skin Care')">Skin Care</button>
+      <button class="cat-pill" onclick="filterCategory('Nutrition')">Nutrition</button>
+      <button class="cat-pill" onclick="filterCategory('Combo')">Combos</button>
+    </div>
+
+    <!-- PRODUCTS -->
+    <section id="productList" class="product-grid" aria-live="polite">
+      <!-- JS will inject cards here -->
+    </section>
+  </main>
+
+  <!-- Floating cart -->
+  <a href="cart.html" class="floating-cart" id="floatingCart">🛒 Cart <span id="cartCount">0</span></a>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="brand">
+        <h3>LyfeCare</h3>
+        <p>Luxury wellness products delivered with trust.</p>
+      </div>
+      <div class="links">
+        <a href="index.html">Home</a>
+        <a href="cart.html">Cart</a>
+        <a href="login.html">Login</a>
+        <a href="dashboard.html">Dashboard</a>
+      </div>
+      <div class="social">
+        <span>Follow</span>
+        <a href="https://instagram.com/jadhav_am0l" target="_blank" class="social-icon">Instagram</a>
+      </div>
+    </div>
+    <div class="copyright">© 2025 LyfeCare • All rights reserved</div>
+  </footer>
 
 <script>
+/* ---------- Data & UI ---------- */
+/* allProducts will be fetched from server endpoint /products (your products.json) */
 let allProducts = [];
+let currentProducts = [];
 
-fetch("/products")
-  .then(res => res.json())
-  .then(data => {
-      allProducts = data;
-      showProducts(data);
-  });
+async function loadProducts() {
+  try {
+    const res = await fetch('/products');
+    const data = await res.json();
+    allProducts = data;
+    currentProducts = allProducts;
+    showProducts(allProducts);
+    updateCartCount();
+  } catch (e) {
+    console.error('Failed to load products', e);
+    document.getElementById('productList').innerHTML = '<p style="color:#aaa;text-align:center;padding:40px">Products unavailable</p>';
+  }
+}
 
 function showProducts(products) {
-    const list = document.getElementById("productList");
-    list.innerHTML = products.map(p => `
-       <div class="product-card">
-           <img src="${p.image}" class="product-img">
-           <h3>${p.name}</h3>
-           <p>${p.description}</p>
-           <strong>₹${p.price}</strong>
-           <button onclick="addToCart(${p.id})">Add to Cart</button>
-           <button onclick="location.href='product.html?id=${p.id}'">View Details</button>
-       </div>
-    `).join("");
+  const list = document.getElementById('productList');
+  if (!products || products.length === 0) {
+    list.innerHTML = '<p style="color:#ccc;text-align:center;padding:40px">No products found.</p>';
+    return;
+  }
+
+  list.innerHTML = products.map(p => `
+    <article class="product-card">
+      <div class="media">
+        <img src="${p.image}" alt="${escapeHtml(p.name)}" class="product-img">
+      </div>
+      <div class="body">
+        <h3>${escapeHtml(p.name)}</h3>
+        <p class="desc">${escapeHtml(p.description || '')}</p>
+        <div class="meta">
+          <strong>₹${Number(p.price).toFixed(2)}</strong>
+          <div class="card-buttons">
+            <button class="btn-add" onclick="addToCart(${p.id})">Add to Cart</button>
+            <button class="btn-view" onclick="viewProduct(${p.id})">View</button>
+          </div>
+        </div>
+      </div>
+    </article>
+  `).join('');
+}
+
+/* simple HTML escape */
+function escapeHtml(s) {
+  if (!s) return '';
+  return s.replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;').replaceAll("'","&#039;");
+}
+
+/* SEARCH */
+function searchProducts() {
+  const q = document.getElementById('searchInput').value.trim().toLowerCase();
+  if (!q) {
+    showProducts(currentProducts);
+    return;
+  }
+  const filtered = currentProducts.filter(p => (p.name + ' ' + (p.description||'')).toLowerCase().includes(q));
+  showProducts(filtered);
+}
+
+/* CATEGORY FILTER */
+function filterCategory(cat) {
+  document.querySelectorAll('.cat-pill').forEach(b => b.classList.remove('active'));
+  // mark active pill
+  document.querySelectorAll('.cat-pill').forEach(btn => {
+    if (btn.innerText.toLowerCase() === cat.toLowerCase() || (cat === 'all' && btn.innerText.toLowerCase() === 'all')) btn.classList.add('active');
+  });
+  if (cat === 'all') {
+    currentProducts = allProducts;
+  } else {
+    currentProducts = allProducts.filter(p => p.category === cat);
+  }
+  document.getElementById('searchInput').value = '';
+  showProducts(currentProducts);
+}
+
+/* CART (localStorage) */
+function getCart() {
+  return JSON.parse(localStorage.getItem('mlcCart') || '[]');
+}
+function setCart(cart) {
+  localStorage.setItem('mlcCart', JSON.stringify(cart));
+  updateCartCount();
 }
 
 function addToCart(id) {
-    let cart = JSON.parse(localStorage.getItem("mlcCart")) || [];
-    let item = cart.find(i => i.id === id);
-
-    if (item) item.qty++;
-    else cart.push({ id: id, qty: 1 });
-
-    localStorage.setItem("mlcCart", JSON.stringify(cart));
-    alert("Added to cart!");
-}
-function searchProducts() {
-    const keyword = document.getElementById("searchInput").value.toLowerCase();
-
-    const filtered = allProducts.filter(p =>
-        p.name.toLowerCase().includes(keyword) ||
-        p.description.toLowerCase().includes(keyword) ||
-        (p.category && p.category.toLowerCase().includes(keyword))
-    );
-
-    showProducts(filtered);
+  const cart = getCart();
+  const item = cart.find(i => i.id === id);
+  if (item) item.qty += 1;
+  else cart.push({id, qty: 1});
+  setCart(cart);
+  // small visual feedback
+  const btn = event?.target;
+  if (btn) {
+    btn.innerText = 'Added ✓';
+    setTimeout(()=> btn.innerText = 'Add to Cart', 900);
+  }
 }
 
-// 🔽 MOBILE MENU TOGGLER
-function toggleMenu() {
-  const menu = document.getElementById("mobileMenu");
-  menu.style.display = (menu.style.display === "block") ? "none" : "block";
+function updateCartCount() {
+  const cart = getCart();
+  const count = cart.reduce((s,i)=>s+i.qty,0);
+  document.getElementById('cartCount').innerText = count;
 }
+
+/* product quick view / details */
+function viewProduct(id) {
+  // simple redirect to product page where you can read id query
+  location.href = `product.html?id=${id}`;
+}
+
+/* floating menu hamburger (mobile) */
+document.getElementById('hambBtn').addEventListener('click', () => {
+  const nav = document.getElementById('navLinks');
+  nav.classList.toggle('open');
+});
+
+/* init */
+loadProducts();
 </script>
 
 </body>
