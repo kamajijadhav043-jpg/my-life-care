@@ -2,21 +2,17 @@
 <html lang="en">
 <head>
   <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Login — My Life Care</title>
+  <title>Login — LyfeCare</title>
   <link rel="stylesheet" href="site.css">
 </head>
 <body>
-  <header class="header">
-    <div class="wrap container">
-      <div class="brand">My Life Care</div>
-    </div>
-  </header>
+  <header class="header"><div class="wrap container"><div class="brand">LyfeCare</div></div></header>
 
   <main class="container hero-area">
-    <section class="hero" style="grid-template-columns: 520px 1fr; gap:40px;">
+    <section class="hero" style="grid-template-columns:520px 1fr;gap:36px;">
       <div class="sign-card" style="text-align:left;">
         <h2>Welcome Back</h2>
-        <div class="subtitle">Login to your My Life Care account</div>
+        <div class="subtitle">Login to your LyfeCare account</div>
 
         <form id="loginForm" onsubmit="event.preventDefault(); doLogin()">
           <input id="email" type="email" placeholder="Email address" required>
@@ -26,35 +22,31 @@
 
         <p style="margin-top:10px;text-align:center" class="small">Or sign in with</p>
         <div class="social-row">
-          <div class="social" onclick="social('google')">G</div>
-          <div class="social" onclick="social('facebook')">f</div>
-          <div class="social" onclick="social('apple')"></div>
+          <div class="social" onclick="location.href='/auth/google'">G</div>
+          <div class="social" onclick="location.href='/auth/facebook'">f</div>
+          <div class="social" onclick="alert('Apple login needs Apple Developer credentials')"></div>
         </div>
 
         <p style="margin-top:12px;text-align:center">Don’t have an account? <a href="register.html">Create one</a></p>
+        <p style="text-align:center;margin-top:8px"><a href="forgot.html">Forgot password?</a></p>
       </div>
 
       <div class="hero-left" style="text-align:left;">
-        <h1>Hey There!</h1>
-        <p>Begin your amazing journey by creating an account with us today. Personalized recommendations, fast checkout & trusted wellness products.</p>
+        <h1>Hello there!</h1>
+        <p>Create an account and start your wellness journey with LyfeCare.</p>
         <a class="btn" href="register.html">Sign Up</a>
       </div>
     </section>
   </main>
 
-  <footer class="site-footer container">© 2025 My Life Care</footer>
+  <footer class="site-footer container">© 2025 LyfeCare</footer>
 
 <script>
 function doLogin(){
-  const email = document.getElementById('email').value;
-  const password = document.getElementById('password').value;
+  const email=document.getElementById('email').value, password=document.getElementById('password').value;
   fetch('/login',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email,password})})
-    .then(r=>r.json()).then(data=>{
-      alert(data.message || 'Logged in');
-      if(data.success){ localStorage.setItem('mlcUser', JSON.stringify(data.user)); window.location='dashboard.html' }
-    }).catch(()=>alert('Server error'));
+    .then(r=>r.json()).then(data=>{ alert(data.message || 'Logged'); if(data.success){ localStorage.setItem('mlcUser', JSON.stringify(data.user)); window.location='dashboard.html' } })
+    .catch(()=>alert('Server error'));
 }
-function social(p){ alert('Social auth: '+p + ' — configure OAuth on server'); }
 </script>
-</body>
-</html>
+</body></html>

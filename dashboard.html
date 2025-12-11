@@ -1,38 +1,51 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Dashboard — My Life Care</title><link rel="stylesheet" href="site.css"></head>
+<title>Dashboard — LyfeCare</title><link rel="stylesheet" href="site.css"></head>
 <body>
-<header class="header"><div class="wrap container"><div class="brand">My Life Care</div></div></header>
+<header class="header"><div class="wrap container"><div class="brand">LyfeCare</div></div></header>
 
 <main class="container" style="padding:28px 0">
   <h2>Dashboard</h2>
   <div id="welcome" style="margin-top:12px"></div>
-  <div style="margin-top:18px" id="adminOrders"></div>
+
+  <div class="dashboard-grid" style="margin-top:18px">
+    <div class="card">
+      <h3 id="totalOrders">0</h3>
+      <div>Total Orders</div>
+    </div>
+    <div class="card">
+      <h3 id="totalRevenue">₹0</h3>
+      <div>Total Revenue</div>
+    </div>
+    <div class="card">
+      <h3 id="totalProducts">0</h3>
+      <div>Products</div>
+    </div>
+  </div>
+
+  <div id="adminOrders" style="margin-top:20px"></div>
 </main>
 
-<footer class="site-footer container">© 2025 My Life Care</footer>
+<footer class="site-footer container">© 2025 LyfeCare</footer>
 
 <script>
 const user = JSON.parse(localStorage.getItem('mlcUser') || 'null');
 if(!user){ alert('Please login'); location.href='login.html' }
-document.getElementById('welcome').innerHTML = <strong>Welcome, ${user.name||user.email}</strong>;
+document.getElementById('welcome').innerHTML = <strong>Welcome, ${user.name || user.email}</strong>;
 
-function loadAllOrders(){
-  fetch('/all-orders').then(r=>r.json()).then(data=>{
-    const el = document.getElementById('adminOrders');
-    if(!data || data.length===0) return el.innerHTML='<div class="sign-card">No orders yet.</div>';
-    el.innerHTML = data.map(o=>`<div style='margin-bottom:12px;padding:12px;background:#fff;border-radius:10px;box-shadow:var(--shadow)'>
-      <strong>Order ${o.id}</strong><br>
-      Email: ${o.email}<br>
-      Total: ₹${o.total}<br>
-      Items: ${o.items.length}
-    </div>`).join('');
-  }).catch(()=>document.getElementById('adminOrders').innerHTML='<div class="sign-card">Unable to load orders</div>');
-}
+fetch('/all-orders').then(r=>r.json()).then(data=>{
+  if(!data || data.length===0) {
+    document.getElementById('adminOrders').innerHTML = '<div class="sign-card">No orders yet.</div>';
+    return;
+  }
+  document.getElementById('totalOrders').innerText = data.length;
+  const rev = data.reduce((s,o)=>s + (o.total||0),0);
+  document.getElementById('totalRevenue').innerText = '₹' + rev;
+  document.getElementById('totalProducts').innerText = data.reduce((s,o)=>s + (o.items?o.items.length:0),0);
 
-// auto load if admin: (you can add user.isAdmin on server)
-if(user && user.isAdmin){ loadAllOrders() } else {
-  document.getElementById('adminOrders').innerHTML = '<div class="sign-card">Orders are visible to admins only.</div>'
-}
+  document.getElementById('adminOrders').innerHTML = data.map(o=>`<div style='margin-bottom:12px;padding:12px;background:var(--panel);border-radius:10px;box-shadow:var(--shadow)'>
+    <strong>Order ${o.id}</strong><br>Email: ${o.email}<br>Total: ₹${o.total}<br>Items: ${o.items?.length || 0}
+  </div>`).join('');
+}).catch(()=>document.getElementById('adminOrders').innerHTML='<div class="sign-card">Unable to load orders</div>');
 </script>
 </body></html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Payment | My Life Care</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="auth-box">
+  <h2>Choose Payment Method</h2>
+
+  <button class="btn-primary" onclick="payCOD()">Cash On Delivery</button>
+  <button class="btn-primary" onclick="payUPI()">UPI Payment</button>
+</div>
+
+<script>
+function payCOD() {
+    alert("Order confirmed (COD)");
+    window.location.href = "dashboard.html";
+}
+
+function payUPI() {
+    alert("UPI Payment simulated. Order confirmed!");
+    window.location.href = "dashboard.html";
+}
+</script>
+
+</body>
+</html>

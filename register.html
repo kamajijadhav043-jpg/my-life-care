@@ -1,16 +1,17 @@
 <!doctype html>
 <html lang="en">
 <head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Register — My Life Care</title>
+  <title>Register — LyfeCare</title>
   <link rel="stylesheet" href="site.css">
 </head>
 <body>
-  <header class="header"><div class="wrap container"><div class="brand">My Life Care</div></div></header>
+  <header class="header"><div class="wrap container"><div class="brand">LyfeCare</div></div></header>
+
   <main class="container hero-area">
     <section style="display:grid;grid-template-columns:1fr 420px;gap:30px;align-items:center">
       <div class="hero-left">
         <h1>Create Your Account</h1>
-        <p>Join My Life Care for exclusive offers, order tracking and faster checkout.</p>
+        <p>Join LyfeCare for offers, order tracking and faster checkout.</p>
       </div>
 
       <aside class="sign-card">
@@ -25,19 +26,15 @@
       </aside>
     </section>
   </main>
-  <footer class="site-footer container">© 2025 My Life Care</footer>
+
+  <footer class="site-footer container">© 2025 LyfeCare</footer>
 
 <script>
 function doRegister(){
-  const name=document.getElementById('rname').value;
-  const email=document.getElementById('remail').value;
-  const password=document.getElementById('rpassword').value;
+  const name=document.getElementById('rname').value, email=document.getElementById('remail').value, password=document.getElementById('rpassword').value;
   fetch('/register',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name,email,password})})
-    .then(r=>r.json()).then(data=>{
-      alert(data.message || 'Registered');
-      if(data.success) window.location='login.html';
-    }).catch(()=>alert('Server error'));
+    .then(r=>r.json()).then(data=>{ alert(data.message||'Registered'); if(data.success) window.location='login.html' })
+    .catch(()=>alert('Server error'));
 }
 </script>
-</body>
-</html>
+</body></html>

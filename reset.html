@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Reset Password — LyfeCare</title><link rel="stylesheet" href="site.css"></head>
+<body>
+<header class="header"><div class="wrap container"><div class="brand">LyfeCare</div></div></header>
+
+<main class="container" style="padding:40px 0">
+  <div style="max-width:520px;margin:0 auto" class="sign-card">
+    <h2>Reset password</h2>
+    <p class="subtitle">Set a new password for your account</p>
+    <input id="np" type="password" placeholder="New password">
+    <input id="cp" type="password" placeholder="Confirm password">
+    <button class="btn-primary" onclick="save()">Save password</button>
+    <p id="msg" style="margin-top:12px;color:var(--muted)"></p>
+  </div>
+</main>
+
+<footer class="site-footer container">© 2025 LyfeCare</footer>
+
+<script>
+const params = new URLSearchParams(window.location.search);
+const token = params.get('token'); const email = params.get('email');
+
+async function save(){
+  const p = document.getElementById('np').value.trim();
+  const c = document.getElementById('cp').value.trim();
+  if(!p || p.length < 6) { alert('Password min 6 chars'); return; }
+  if(p !== c) { alert('Passwords do not match'); return; }
+  const res = await fetch('/reset',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email,token,password:p})});
+  const j = await res.json();
+  if(j.success){ document.getElementById('msg').innerText = j.message || 'Password updated'; setTimeout(()=>location.href='login.html',1500); }
+  else document.getElementById('msg').innerText = j.message || 'Invalid or expired link';
+}
+</script>
+</body></html>

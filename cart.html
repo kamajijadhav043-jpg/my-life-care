@@ -1,49 +1,40 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Cart — My Life Care</title><link rel="stylesheet" href="site.css"></head>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Register — LyfeCare</title>
+  <link rel="stylesheet" href="site.css">
+</head>
 <body>
-<header class="header"><div class="wrap container"><div class="brand">My Life Care</div></div></header>
+  <header class="header"><div class="wrap container"><div class="brand">LyfeCare</div></div></header>
 
-<main class="container" style="padding:30px 0">
-  <h2>Your Cart</h2>
-  <div id="cart" class="cart-list" style="margin-top:12px"></div>
-  <div style="margin-top:18px">
-    <button onclick="checkout()" class="btn">Checkout</button>
-  </div>
-</main>
+  <main class="container hero-area">
+    <section style="display:grid;grid-template-columns:1fr 420px;gap:30px;align-items:center">
+      <div class="hero-left">
+        <h1>Create Your Account</h1>
+        <p>Join LyfeCare for offers, order tracking and faster checkout.</p>
+      </div>
 
-<footer class="site-footer container">© 2025 My Life Care</footer>
+      <aside class="sign-card">
+        <h2>Sign Up</h2>
+        <form id="regForm" onsubmit="event.preventDefault(); doRegister()">
+          <input id="rname" placeholder="Full name" required>
+          <input id="remail" type="email" placeholder="Email address" required>
+          <input id="rpassword" type="password" placeholder="Password" required>
+          <button class="btn-primary" type="submit">Create account</button>
+        </form>
+        <p style="margin-top:10px;text-align:center">Already a member? <a href="login.html">Login</a></p>
+      </aside>
+    </section>
+  </main>
+
+  <footer class="site-footer container">© 2025 LyfeCare</footer>
 
 <script>
-async function loadProducts(){
-  try{
-    const list = await fetch('/products').then(r=>r.json()).catch(()=>fetch('products.json').then(r=>r.json()));
-    return list||[];
-  }catch(e){return []}
+function doRegister(){
+  const name=document.getElementById('rname').value, email=document.getElementById('remail').value, password=document.getElementById('rpassword').value;
+  fetch('/register',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name,email,password})})
+    .then(r=>r.json()).then(data=>{ alert(data.message||'Registered'); if(data.success) window.location='login.html' })
+    .catch(()=>alert('Server error'));
 }
-
-async function renderCart(){
-  const cart = JSON.parse(localStorage.getItem('mlcCart')||'[]');
-  const products = await loadProducts();
-  const el = document.getElementById('cart');
-  if(cart.length===0){ el.innerHTML = '<div style="padding:20px;background:#fff;border-radius:12px">Your cart is empty</div>'; return; }
-  el.innerHTML = cart.map(ci=>{
-    const p = products.find(x=>x.id===ci.id) || {};
-    return `<div class="cart-item">
-      <img src="${p.image||'product1.jpg'}" style="width:84px;height:84px;border-radius:10px;object-fit:cover">
-      <div style="flex:1">
-        <strong>${p.name||'Product'}</strong>
-        <div style="color:var(--muted)">${p.description || ''}</div>
-      </div>
-      <div style="text-align:right">
-        <div>₹${p.price || 0}</div>
-        <div>Qty: ${ci.qty}</div>
-      </div>
-    </div>`;
-  }).join('');
-}
-renderCart();
-
-function checkout(){ alert('Proceed to payment - implement server checkout'); }
 </script>
 </body></html>

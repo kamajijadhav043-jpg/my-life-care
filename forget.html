@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Forgot Password — LyfeCare</title><link rel="stylesheet" href="site.css"></head>
+<body>
+<header class="header"><div class="wrap container"><div class="brand">LyfeCare</div></div></header>
+
+<main class="container" style="padding:40px 0">
+  <div style="max-width:520px;margin:0 auto" class="sign-card">
+    <h2>Forgot password</h2>
+    <p class="subtitle">Enter your email and we'll send a secure reset link.</p>
+    <input id="femail" type="email" placeholder="Email address">
+    <button class="btn-primary" onclick="sendLink()">Send reset link</button>
+    <p id="msg" style="margin-top:12px;color:var(--muted)"></p>
+  </div>
+</main>
+
+<footer class="site-footer container">© 2025 LyfeCare</footer>
+
+<script>
+async function sendLink(){
+  const email = document.getElementById('femail').value.trim();
+  if(!email) { alert('Enter email'); return;}
+  const res = await fetch('/forgot',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email})});
+  const j = await res.json();
+  document.getElementById('msg').innerText = j.message || 'If that email exists we sent a reset link.';
+}
+</script>
+</body></html>

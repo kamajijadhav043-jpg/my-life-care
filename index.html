@@ -1,15 +1,14 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>My Life Care — Home</title>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>LyfeCare — Home</title>
   <link rel="stylesheet" href="site.css">
 </head>
 <body>
   <header class="header">
     <div class="wrap container">
-      <div class="brand">My Life Care</div>
+      <div class="brand">LyfeCare</div>
       <nav class="nav">
         <a href="index.html">Home</a>
         <a href="cart.html">Cart</a>
@@ -22,8 +21,8 @@
   <main class="container hero-area">
     <section class="hero">
       <div class="hero-left">
-        <h1>Your Wellness Journey Begins Here</h1>
-        <p>Quality wellness products for a healthier and happier lifestyle.</p>
+        <h1>Your Wellness Journey Begins</h1>
+        <p>Shop trusted supplements, vitamins, skincare and wellness essentials curated for you.</p>
         <a class="btn" href="#products">Shop Now</a>
 
         <div id="products" class="products" aria-live="polite"></div>
@@ -31,7 +30,7 @@
 
       <aside class="sign-card">
         <h2>Welcome Back</h2>
-        <div class="subtitle">Login to your My Life Care account</div>
+        <div class="subtitle">Login to your LyfeCare account</div>
 
         <form onsubmit="event.preventDefault(); quickLogin()" style="margin-top:8px">
           <input id="homeEmail" type="email" placeholder="Email address" required>
@@ -40,9 +39,9 @@
         </form>
 
         <div class="social-row">
-          <div class="social" onclick="social('google')">G</div>
-          <div class="social" onclick="social('facebook')">f</div>
-          <div class="social" onclick="social('apple')"></div>
+          <div class="social" onclick="location.href='/auth/google'">G</div>
+          <div class="social" onclick="location.href='/auth/facebook'">f</div>
+          <div class="social" onclick="alert('Apple login requires Apple Developer setup')"></div>
         </div>
 
         <p style="margin-top:12px">Don't have an account? <a href="register.html">Create one</a></p>
@@ -51,29 +50,23 @@
   </main>
 
   <footer class="site-footer container">
-    © 2025 My Life Care — Designed with ❤ for Wellness
+    © 2025 LyfeCare — Made with care
   </footer>
 
 <script>
 let allProducts = [];
-
-// If you serve /products JSON from server, use that; otherwise there is a local file products.json in repo
-fetch('/products')
-  .then(r=>r.json())
-  .catch(()=>fetch('products.json').then(r=>r.json()))
-  .then(data=>{
-    allProducts = data || [];
-    renderProducts(allProducts.slice(0,12));
-  });
+fetch('/products').then(r=>r.json()).catch(()=>fetch('products.json').then(r=>r.json()))
+.then(data=>{ allProducts = data || []; renderProducts(allProducts.slice(0,12)); })
+.catch(()=>{ document.getElementById('products').innerHTML = '<div style="padding:20px">No products</div>'; });
 
 function renderProducts(products){
   const el = document.getElementById('products');
   if(!el) return;
-  el.innerHTML = products.map(p=>`
+  el.innerHTML = products.map(p => `
     <div class="product-card">
-      <img src="${p.image || 'product1.jpg'}" alt="${escapeHtml(p.name)}">
-      <h3>${escapeHtml(p.name)}</h3>
-      <p>${escapeHtml(p.description || '')}</p>
+      <img src="${p.image || 'product1.jpg'}" alt="${(p.name||'').replace(/"/g,'') }">
+      <h3>${p.name}</h3>
+      <p>${p.description || ''}</p>
       <div class="price-row">
         <strong>₹${p.price}</strong>
         <button class="add-btn" onclick="addToCart(${p.id})">Add</button>
@@ -96,16 +89,10 @@ function quickLogin(){
   const password = document.getElementById('homePassword').value;
   fetch('/login',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email,password})})
     .then(r=>r.json()).then(data=>{
-      alert(data.message||'Logged in');
+      alert(data.message || 'Response');
       if(data.success){ localStorage.setItem('mlcUser', JSON.stringify(data.user)); location.href='dashboard.html' }
     }).catch(()=>alert('Server error'));
 }
-
-function social(provider){
-  alert('Social login: '+provider + ' (setup OAuth in backend)');
-}
-
-function escapeHtml(s){ if(!s) return ''; return s.replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;') }
 </script>
 </body>
 </html>
