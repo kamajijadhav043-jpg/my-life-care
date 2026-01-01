@@ -2,75 +2,71 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Wallpaper Gallery</title>
+  <title>Luxury Wallpapers</title>
   <link rel="stylesheet" href="style.css">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
 
-<!-- HEADER -->
 <header class="header">
-  <h1>WallCraft</h1>
+  <div class="logo">LUXE WALLS</div>
   <nav>
-    <a href="#">Home</a>
-    <a href="#">Gallery</a>
+    <a href="#">Collection</a>
+    <a href="#">About</a>
     <a href="#">Contact</a>
   </nav>
 </header>
 
-<!-- HERO -->
 <section class="hero">
-  <div class="hero-text">
-    <h2>Transform Your Walls</h2>
-    <p>Premium Wallpapers Starting at ₹50</p>
-    <button>Explore Collection</button>
+  <div class="hero-content">
+    <h1>Walls, Redefined</h1>
+    <p>Luxury wallpapers curated for modern interiors</p>
+    <a href="#collection" class="btn">View Collection</a>
   </div>
 </section>
 
-<!-- FILTER -->
-<section class="filters">
-  <button onclick="filterPrice('all')">All</button>
-  <button onclick="filterPrice(50)">₹50</button>
-  <button onclick="filterPrice(100)">₹100</button>
-  <button onclick="filterPrice(200)">Premium</button>
+<section class="collection" id="collection">
+  <div class="card">
+    <img src="https://images.unsplash.com/photo-1600121848594-d8644e57abab">
+    <div class="card-info">
+      <h3>Marble Noir</h3>
+      <span>₹100 / sqft</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <img src="https://images.unsplash.com/photo-1615874959474-d609969a20ed">
+    <div class="card-info">
+      <h3>Royal Texture</h3>
+      <span>₹150 / sqft</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c">
+    <div class="card-info">
+      <h3>Modern Stone</h3>
+      <span>₹120 / sqft</span>
+    </div>
+  </div>
 </section>
 
-<!-- GALLERY -->
-<section class="gallery" id="gallery">
-
-  <div class="card" data-price="50">
-    <img src="https://images.unsplash.com/photo-1505691938895-1758d7feb511" />
-    <h3>Floral Bliss</h3>
-    <p>₹50</p>
-    <button>Buy Now</button>
-  </div>
-
-  <div class="card" data-price="100">
-    <img src="https://images.unsplash.com/photo-1524758631624-e2822e304c36" />
-    <h3>Modern Lines</h3>
-    <p>₹100</p>
-    <button>Buy Now</button>
-  </div>
-
-  <div class="card" data-price="200">
-    <img src="https://images.unsplash.com/photo-1505691723518-36a5ac3b2d99" />
-    <h3>Luxury Marble</h3>
-    <p>₹200</p>
-    <button>Buy Now</button>
-  </div>
-
-</section>
-
-<!-- WHATSAPP -->
-<a class="whatsapp" href="https://wa.me/917030971315" target="_blank">
-  💬
+<!-- WhatsApp -->
+<a class="whatsapp"
+   href="https://wa.me/917030971315?text=Hello%20I%20am%20interested%20in%20your%20luxury%20wallpapers"
+   target="_blank">
+  WhatsApp
 </a>
 
-<!-- FOOTER -->
-<footer>
-  <p>© 2026 WallCraft | Designed for Wallpaper Sellers</p>
+<footer class="footer">
+  <p>© 2026 Luxe Walls</p>
+  <p>
+    Instagram:
+    <a href="https://instagram.com/jadhav_am0l" target="_blank">
+      @jadhav_am0l
+    </a>
+  </p>
 </footer>
 
-<script src="script.js"></script>
 </body>
 </html>
