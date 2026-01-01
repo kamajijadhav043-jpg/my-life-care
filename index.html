@@ -1,98 +1,76 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>LyfeCare — Home</title>
-  <link rel="stylesheet" href="site.css">
+  <meta charset="UTF-8">
+  <title>Wallpaper Gallery</title>
+  <link rel="stylesheet" href="style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
-  <header class="header">
-    <div class="wrap container">
-      <div class="brand">LyfeCare</div>
-      <nav class="nav">
-        <a href="index.html">Home</a>
-        <a href="cart.html">Cart</a>
-        <a href="login.html">Login</a>
-        <a href="dashboard.html" class="cta">Dashboard</a>
-      </nav>
-    </div>
-  </header>
 
-  <main class="container hero-area">
-    <section class="hero">
-      <div class="hero-left">
-        <h1>Your Wellness Journey Begins</h1>
-        <p>Shop trusted supplements, vitamins, skincare and wellness essentials curated for you.</p>
-        <a class="btn" href="#products">Shop Now</a>
+<!-- HEADER -->
+<header class="header">
+  <h1>WallCraft</h1>
+  <nav>
+    <a href="#">Home</a>
+    <a href="#">Gallery</a>
+    <a href="#">Contact</a>
+  </nav>
+</header>
 
-        <div id="products" class="products" aria-live="polite"></div>
-      </div>
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-text">
+    <h2>Transform Your Walls</h2>
+    <p>Premium Wallpapers Starting at ₹50</p>
+    <button>Explore Collection</button>
+  </div>
+</section>
 
-      <aside class="sign-card">
-        <h2>Welcome Back</h2>
-        <div class="subtitle">Login to your LyfeCare account</div>
+<!-- FILTER -->
+<section class="filters">
+  <button onclick="filterPrice('all')">All</button>
+  <button onclick="filterPrice(50)">₹50</button>
+  <button onclick="filterPrice(100)">₹100</button>
+  <button onclick="filterPrice(200)">Premium</button>
+</section>
 
-        <form onsubmit="event.preventDefault(); quickLogin()" style="margin-top:8px">
-          <input id="homeEmail" type="email" placeholder="Email address" required>
-          <input id="homePassword" type="password" placeholder="Password" required>
-          <button class="btn-primary" type="submit">Sign In</button>
-        </form>
+<!-- GALLERY -->
+<section class="gallery" id="gallery">
 
-        <div class="social-row">
-          <div class="social" onclick="location.href='/auth/google'">G</div>
-          <div class="social" onclick="location.href='/auth/facebook'">f</div>
-          <div class="social" onclick="alert('Apple login requires Apple Developer setup')"></div>
-        </div>
+  <div class="card" data-price="50">
+    <img src="https://images.unsplash.com/photo-1505691938895-1758d7feb511" />
+    <h3>Floral Bliss</h3>
+    <p>₹50</p>
+    <button>Buy Now</button>
+  </div>
 
-        <p style="margin-top:12px">Don't have an account? <a href="register.html">Create one</a></p>
-      </aside>
-    </section>
-  </main>
+  <div class="card" data-price="100">
+    <img src="https://images.unsplash.com/photo-1524758631624-e2822e304c36" />
+    <h3>Modern Lines</h3>
+    <p>₹100</p>
+    <button>Buy Now</button>
+  </div>
 
-  <footer class="site-footer container">
-    © 2025 LyfeCare — Made with care
-  </footer>
+  <div class="card" data-price="200">
+    <img src="https://images.unsplash.com/photo-1505691723518-36a5ac3b2d99" />
+    <h3>Luxury Marble</h3>
+    <p>₹200</p>
+    <button>Buy Now</button>
+  </div>
 
-<script>
-let allProducts = [];
-fetch('/products').then(r=>r.json()).catch(()=>fetch('products.json').then(r=>r.json()))
-.then(data=>{ allProducts = data || []; renderProducts(allProducts.slice(0,12)); })
-.catch(()=>{ document.getElementById('products').innerHTML = '<div style="padding:20px">No products</div>'; });
+</section>
 
-function renderProducts(products){
-  const el = document.getElementById('products');
-  if(!el) return;
-  el.innerHTML = products.map(p => `
-    <div class="product-card">
-      <img src="${p.image || 'product1.jpg'}" alt="${(p.name||'').replace(/"/g,'') }">
-      <h3>${p.name}</h3>
-      <p>${p.description || ''}</p>
-      <div class="price-row">
-        <strong>₹${p.price}</strong>
-        <button class="add-btn" onclick="addToCart(${p.id})">Add</button>
-      </div>
-    </div>
-  `).join('');
-}
+<!-- WHATSAPP -->
+<a class="whatsapp" href="https://wa.me/917030971315" target="_blank">
+  💬
+</a>
 
-function addToCart(id){
-  let cart = JSON.parse(localStorage.getItem('mlcCart')||'[]');
-  let item = cart.find(i=>i.id===id);
-  if(item) item.qty++;
-  else cart.push({id,qty:1});
-  localStorage.setItem('mlcCart',JSON.stringify(cart));
-  alert('Added to cart');
-}
+<!-- FOOTER -->
+<footer>
+  <p>© 2026 WallCraft | Designed for Wallpaper Sellers</p>
+</footer>
 
-function quickLogin(){
-  const email = document.getElementById('homeEmail').value;
-  const password = document.getElementById('homePassword').value;
-  fetch('/login',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email,password})})
-    .then(r=>r.json()).then(data=>{
-      alert(data.message || 'Response');
-      if(data.success){ localStorage.setItem('mlcUser', JSON.stringify(data.user)); location.href='dashboard.html' }
-    }).catch(()=>alert('Server error'));
-}
-</script>
+<script src="script.js"></script>
 </body>
 </html>
