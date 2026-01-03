@@ -1,53 +1,100 @@
+/* =========================
+   GLOBAL RESET & VARIABLES
+========================= */
+:root {
+  --bg: #0b0b0b;
+  --panel: #121212;
+  --text: #eaeaea;
+  --muted: #a0a0a0;
+  --gold: #c9a24d;
+  --border: rgba(255,255,255,0.08);
+}
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Segoe UI", sans-serif;
+  font-family: "Segoe UI", system-ui, sans-serif;
 }
 
 body {
-  background: #0e0e0e;
-  color: #eaeaea;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
 }
 
-/* HEADER */
+/* =========================
+   LINKS & BUTTONS
+========================= */
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.btn {
+  display: inline-block;
+  padding: 14px 36px;
+  border: 1px solid var(--gold);
+  color: var(--gold);
+  font-size: 14px;
+  letter-spacing: 1px;
+  transition: 0.3s;
+}
+
+.btn:hover {
+  background: var(--gold);
+  color: #000;
+}
+
+/* =========================
+   HEADER
+========================= */
 .header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  padding: 22px 60px;
   display: flex;
   justify-content: space-between;
-  padding: 25px 60px;
-  position: absolute;
-  width: 100%;
-  z-index: 10;
+  align-items: center;
+  background: rgba(0,0,0,0.6);
+  backdrop-filter: blur(8px);
+  z-index: 1000;
 }
 
 .logo {
+  font-size: 18px;
   letter-spacing: 3px;
   font-weight: 600;
 }
 
-.header a {
-  color: #ccc;
-  margin-left: 30px;
-  text-decoration: none;
+.nav a {
+  margin-left: 28px;
   font-size: 14px;
+  color: var(--muted);
 }
 
-/* HERO */
+.nav a:hover {
+  color: var(--gold);
+}
+
+/* =========================
+   HERO SECTION
+========================= */
 .hero {
   height: 100vh;
-  background: linear-gradient(
-      rgba(0,0,0,0.55),
-      rgba(0,0,0,0.55)
-    ),
+  background:
+    linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55)),
     url("https://images.unsplash.com/photo-1615874959474-d609969a20ed")
-    center/cover;
+    center / cover no-repeat;
   display: flex;
   align-items: center;
   padding-left: 80px;
 }
 
 .hero-content {
-  max-width: 500px;
+  max-width: 520px;
+  animation: fadeUp 1.2s ease forwards;
 }
 
 .hero h1 {
@@ -57,22 +104,30 @@ body {
 }
 
 .hero p {
-  margin: 20px 0 40px;
-  color: #b5b5b5;
+  margin: 22px 0 40px;
+  color: var(--muted);
   font-size: 16px;
 }
 
-.btn {
-  padding: 14px 40px;
-  border: 1px solid #c9a24d;
-  color: #c9a24d;
-  text-decoration: none;
-  font-size: 14px;
+/* =========================
+   SECTION LAYOUT
+========================= */
+.section {
+  padding: 120px 80px;
 }
 
-/* COLLECTION */
-.collection {
-  padding: 100px 80px;
+.section-title {
+  font-size: 28px;
+  font-weight: 300;
+  letter-spacing: 2px;
+  margin-bottom: 60px;
+  text-align: center;
+}
+
+/* =========================
+   PRODUCT GRID
+========================= */
+.grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 50px;
@@ -81,6 +136,7 @@ body {
 .card {
   position: relative;
   overflow: hidden;
+  cursor: pointer;
 }
 
 .card img {
@@ -96,8 +152,8 @@ body {
 
 .card-info {
   position: absolute;
-  bottom: 30px;
-  left: 30px;
+  bottom: 28px;
+  left: 28px;
 }
 
 .card-info h3 {
@@ -107,64 +163,133 @@ body {
 
 .card-info span {
   font-size: 13px;
-  color: #c9a24d;
+  color: var(--gold);
 }
 
-/* WHATSAPP */
+/* =========================
+   PRODUCT PAGE
+========================= */
+.product {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 80px;
+  padding: 160px 80px 100px;
+}
+
+.product img {
+  width: 100%;
+  height: 520px;
+  object-fit: cover;
+}
+
+.product-info h1 {
+  font-size: 36px;
+  font-weight: 300;
+  letter-spacing: 2px;
+}
+
+.product-info .price {
+  margin: 20px 0;
+  font-size: 18px;
+  color: var(--gold);
+}
+
+.product-info p {
+  color: var(--muted);
+  margin-bottom: 40px;
+}
+
+/* =========================
+   FORMS (LOGIN / REGISTER)
+========================= */
+.form-box {
+  max-width: 420px;
+  margin: 160px auto;
+  background: var(--panel);
+  padding: 40px;
+  border: 1px solid var(--border);
+}
+
+.form-box h2 {
+  font-weight: 300;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.form-box input {
+  width: 100%;
+  padding: 14px;
+  margin-bottom: 18px;
+  background: #0e0e0e;
+  border: 1px solid var(--border);
+  color: var(--text);
+}
+
+.form-box button {
+  width: 100%;
+  padding: 14px;
+  background: transparent;
+  border: 1px solid var(--gold);
+  color: var(--gold);
+  cursor: pointer;
+}
+
+.form-box button:hover {
+  background: var(--gold);
+  color: #000;
+}
+
+/* =========================
+   DASHBOARD / ADMIN
+========================= */
+.panel {
+  padding: 140px 80px;
+}
+
+.panel-card {
+  background: var(--panel);
+  padding: 30px;
+  border: 1px solid var(--border);
+  margin-bottom: 30px;
+}
+
+/* =========================
+   WHATSAPP FLOAT
+========================= */
 .whatsapp {
   position: fixed;
-  bottom: 30px;
-  right: 30px;
-  padding: 12px 22px;
-  border: 1px solid #c9a24d;
-  color: #c9a24d;
-  text-decoration: none;
+  right: 24px;
+  bottom: 24px;
+  padding: 14px 22px;
+  border: 1px solid var(--gold);
+  color: var(--gold);
   font-size: 13px;
   background: transparent;
+  z-index: 999;
 }
 
-/* FOOTER */
+.whatsapp:hover {
+  background: var(--gold);
+  color: #000;
+}
+
+/* =========================
+   FOOTER
+========================= */
 .footer {
-  padding: 40px;
+  padding: 50px 20px;
   text-align: center;
   font-size: 13px;
   color: #777;
 }
 
 .footer a {
-  color: #c9a24d;
-  text-decoration: none;
-}
-.admin {
-  padding: 100px;
+  color: var(--gold);
 }
 
-.admin h1 {
-  font-weight: 300;
-  margin-bottom: 40px;
-}
-
-.admin-card {
-  background: #151515;
-  padding: 30px;
-  margin-bottom: 30px;
-}
-
-.admin-card input,
-.admin-card button {
-  width: 100%;
-  margin-top: 15px;
-  padding: 12px;
-  background: #0e0e0e;
-  border: 1px solid #333;
-  color: #ccc;
-}
-.hero-content,
-.card,
-.product-info {
-  animation: fadeUp 1.2s ease forwards;
-}
-
+/* =========================
+   ANIMATIONS
+========================= */
 @keyframes fadeUp {
   from {
     opacity: 0;
@@ -173,5 +298,28 @@ body {
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+@media (max-width: 900px) {
+  .header {
+    padding: 18px 30px;
+  }
+
+  .hero {
+    padding: 0 30px;
+    text-align: center;
+  }
+
+  .product {
+    grid-template-columns: 1fr;
+    padding: 140px 30px;
+  }
+
+  .section {
+    padding: 100px 30px;
   }
 }

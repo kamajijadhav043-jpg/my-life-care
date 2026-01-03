@@ -2,71 +2,109 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Luxury Wallpapers</title>
-  <link rel="stylesheet" href="style.css">
+  <title>Luxe Walls | Luxury Wallpapers</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Main CSS -->
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
+<!-- ================= HEADER ================= -->
 <header class="header">
   <div class="logo">LUXE WALLS</div>
-  <nav>
-    <a href="#">Collection</a>
-    <a href="#">About</a>
-    <a href="#">Contact</a>
+  <nav class="nav">
+    <a href="index.html">Home</a>
+    <a href="products.html">Collection</a>
+    <a href="login.html">Account</a>
+    <a href="contact.html">Contact</a>
   </nav>
 </header>
 
+<!-- ================= HERO ================= -->
 <section class="hero">
   <div class="hero-content">
     <h1>Walls, Redefined</h1>
-    <p>Luxury wallpapers curated for modern interiors</p>
-    <a href="#collection" class="btn">View Collection</a>
+    <p>
+      Luxury wallpapers crafted for modern interiors.  
+      Elevate your space with timeless design.
+    </p>
+    <a href="products.html" class="btn">View Collection</a>
   </div>
 </section>
 
-<section class="collection" id="collection">
-  <div class="card">
-    <img src="https://images.unsplash.com/photo-1600121848594-d8644e57abab">
-    <div class="card-info">
-      <h3>Marble Noir</h3>
-      <span>₹100 / sqft</span>
-    </div>
-  </div>
+<!-- ================= FEATURED ================= -->
+<section class="section">
+  <h2 class="section-title">Featured Wallpapers</h2>
 
-  <div class="card">
-    <img src="https://images.unsplash.com/photo-1615874959474-d609969a20ed">
-    <div class="card-info">
-      <h3>Royal Texture</h3>
-      <span>₹150 / sqft</span>
+  <div class="grid">
+    <!-- Card 1 -->
+    <div class="card" onclick="goProduct('Marble Noir',120)">
+      <img src="https://images.unsplash.com/photo-1600121848594-d8644e57abab" alt="Marble Noir">
+      <div class="card-info">
+        <h3>Marble Noir</h3>
+        <span>₹120 / sqft</span>
+      </div>
     </div>
-  </div>
 
-  <div class="card">
-    <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c">
-    <div class="card-info">
-      <h3>Modern Stone</h3>
-      <span>₹120 / sqft</span>
+    <!-- Card 2 -->
+    <div class="card" onclick="goProduct('Royal Texture',150)">
+      <img src="https://images.unsplash.com/photo-1615874959474-d609969a20ed" alt="Royal Texture">
+      <div class="card-info">
+        <h3>Royal Texture</h3>
+        <span>₹150 / sqft</span>
+      </div>
+    </div>
+
+    <!-- Card 3 -->
+    <div class="card" onclick="goProduct('Modern Stone',140)">
+      <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c" alt="Modern Stone">
+      <div class="card-info">
+        <h3>Modern Stone</h3>
+        <span>₹140 / sqft</span>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- WhatsApp -->
+<!-- ================= INSTAGRAM ================= -->
+<section class="section">
+  <h2 class="section-title">From Instagram</h2>
+  <p style="text-align:center;color:#aaa;margin-bottom:40px">
+    Follow <b>@jadhav_am0l</b> for interior inspiration
+  </p>
+
+  <div class="grid">
+    <img src="https://picsum.photos/600/600?1" alt="">
+    <img src="https://picsum.photos/600/600?2" alt="">
+    <img src="https://picsum.photos/600/600?3" alt="">
+  </div>
+</section>
+
+<!-- ================= FOOTER ================= -->
+<footer class="footer">
+  <p>© 2026 Luxe Walls. All rights reserved.</p>
+  <p>
+    <a href="https://instagram.com/jadhav_am0l" target="_blank">Instagram</a> ·
+    <a href="https://wa.me/917030971315" target="_blank">WhatsApp</a>
+  </p>
+</footer>
+
+<!-- ================= WHATSAPP FLOAT ================= -->
 <a class="whatsapp"
-   href="https://wa.me/917030971315?text=Hello%20I%20am%20interested%20in%20your%20luxury%20wallpapers"
+   href="https://wa.me/917030971315?text=Hi%20I%20am%20interested%20in%20your%20luxury%20wallpapers"
    target="_blank">
   WhatsApp
 </a>
 
-<footer class="footer">
-  <p>© 2026 Luxe Walls</p>
-  <p>
-    Instagram:
-    <a href="https://instagram.com/jadhav_am0l" target="_blank">
-      @jadhav_am0l
-    </a>
-  </p>
-</footer>
+<!-- ================= JS ================= -->
+<script>
+  function goProduct(name, price) {
+    localStorage.setItem("productName", name);
+    localStorage.setItem("productPrice", price);
+    window.location.href = "product.html";
+  }
+</script>
 
 </body>
 </html>

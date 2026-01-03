@@ -1,40 +1,96 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Register — LyfeCare</title>
-  <link rel="stylesheet" href="site.css">
+<head>
+  <meta charset="UTF-8">
+  <title>Wallpaper Details | Luxe Walls</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Main CSS -->
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-  <header class="header"><div class="wrap container"><div class="brand">LyfeCare</div></div></header>
 
-  <main class="container hero-area">
-    <section style="display:grid;grid-template-columns:1fr 420px;gap:30px;align-items:center">
-      <div class="hero-left">
-        <h1>Create Your Account</h1>
-        <p>Join LyfeCare for offers, order tracking and faster checkout.</p>
-      </div>
+<!-- ================= HEADER ================= -->
+<header class="header">
+  <div class="logo">LUXE WALLS</div>
+  <nav class="nav">
+    <a href="index.html">Home</a>
+    <a href="products.html">Collection</a>
+    <a href="cart.html">Cart</a>
+    <a href="login.html">Account</a>
+  </nav>
+</header>
 
-      <aside class="sign-card">
-        <h2>Sign Up</h2>
-        <form id="regForm" onsubmit="event.preventDefault(); doRegister()">
-          <input id="rname" placeholder="Full name" required>
-          <input id="remail" type="email" placeholder="Email address" required>
-          <input id="rpassword" type="password" placeholder="Password" required>
-          <button class="btn-primary" type="submit">Create account</button>
-        </form>
-        <p style="margin-top:10px;text-align:center">Already a member? <a href="login.html">Login</a></p>
-      </aside>
-    </section>
-  </main>
+<!-- ================= PRODUCT ================= -->
+<section class="product">
+  <!-- Image -->
+  <div>
+    <img id="productImg"
+         src="https://images.unsplash.com/photo-1600121848594-d8644e57abab"
+         alt="Wallpaper">
+  </div>
 
-  <footer class="site-footer container">© 2025 LyfeCare</footer>
+  <!-- Info -->
+  <div class="product-info">
+    <h1 id="productName">Wallpaper Name</h1>
+    <div class="price" id="productPrice">₹0 / sqft</div>
 
+    <p>
+      Premium luxury wallpaper designed to elevate modern interiors.
+      Crafted with rich textures and timeless aesthetics.
+    </p>
+
+    <a href="#" class="btn" onclick="addToCart()">Add to Cart</a>
+    <br><br>
+    <a href="#" class="btn" onclick="whatsAppEnquiry()">WhatsApp Enquiry</a>
+  </div>
+</section>
+
+<!-- ================= FOOTER ================= -->
+<footer class="footer">
+  <p>© 2026 Luxe Walls</p>
+  <p>
+    <a href="https://instagram.com/jadhav_am0l" target="_blank">Instagram</a> ·
+    <a href="https://wa.me/917030971315" target="_blank">WhatsApp</a>
+  </p>
+</footer>
+
+<!-- ================= WHATSAPP FLOAT ================= -->
+<a class="whatsapp"
+   href="https://wa.me/917030971315"
+   target="_blank">
+  WhatsApp
+</a>
+
+<!-- ================= JS ================= -->
 <script>
-function doRegister(){
-  const name=document.getElementById('rname').value, email=document.getElementById('remail').value, password=document.getElementById('rpassword').value;
-  fetch('/register',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name,email,password})})
-    .then(r=>r.json()).then(data=>{ alert(data.message||'Registered'); if(data.success) window.location='login.html' })
-    .catch(()=>alert('Server error'));
-}
+  // Load product from home page
+  const name = localStorage.getItem("productName") || "Luxury Wallpaper";
+  const price = localStorage.getItem("productPrice") || "120";
+
+  document.getElementById("productName").innerText = name;
+  document.getElementById("productPrice").innerText = "₹" + price + " / sqft";
+
+  function addToCart() {
+    let cart = JSON.parse(localStorage.getItem("cart") || "[]");
+    cart.push({ name, price });
+    localStorage.setItem("cart", JSON.stringify(cart));
+    alert("Added to cart");
+  }
+
+  function whatsAppEnquiry() {
+    const msg =
+      "Hi, I am interested in the wallpaper: " +
+      name +
+      " (₹" +
+      price +
+      "/sqft)";
+    window.open(
+      "https://wa.me/917030971315?text=" + encodeURIComponent(msg),
+      "_blank"
+    );
+  }
 </script>
-</body></html>
+
+</body>
+</html>
