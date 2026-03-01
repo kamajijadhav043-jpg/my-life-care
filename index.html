@@ -1,154 +1,99 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Dr. X Pharma Bhau</title>
+<title>LyfeCare - Medicine Guidance</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 
 <style>
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:'Poppins', sans-serif;
-}
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
+body{background:#f4f8ff;color:#1f2d3d;}
 
-body{
-    background:#f4f8ff;
-    color:#1f2d3d;
-}
-
+/* NAVBAR */
 nav{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    padding:20px 60px;
-    background:#ffffff;
-    box-shadow:0 2px 10px rgba(0,0,0,0.05);
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:20px 60px;
+background:#ffffff;
+box-shadow:0 2px 10px rgba(0,0,0,0.05);
 }
-
 .logo{
-    font-size:22px;
-    font-weight:700;
-    color:#2F80ED;
+font-size:22px;
+font-weight:700;
+color:#2F80ED;
 }
 
-.nav-links a{
-    margin:0 15px;
-    text-decoration:none;
-    color:#1f2d3d;
-    font-weight:500;
-}
-
+/* HERO */
 .hero{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    padding:80px 60px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:80px 60px;
 }
-
-.hero-text{
-    flex:1;
-}
-
+.hero-text{flex:1;}
 .hero-text h1{
-    font-size:44px;
-    margin-bottom:20px;
+font-size:42px;
+margin-bottom:20px;
 }
-
 .hero-text p{
-    color:#6c7a89;
-    margin-bottom:25px;
+color:#6c7a89;
+margin-bottom:25px;
+}
+.hero-text button{
+padding:14px 28px;
+background:#2F80ED;
+color:#fff;
+border:none;
+border-radius:8px;
+cursor:pointer;
+font-size:16px;
 }
 
-.hero-text a{
-    display:inline-block;
-    padding:12px 25px;
-    background:#2F80ED;
-    color:#fff;
-    text-decoration:none;
-    border-radius:8px;
-}
-
-.hero-img{
-    flex:1;
-    text-align:right;
-}
-
+.hero-img{flex:1;text-align:right;}
 .hero-img img{
-    width:380px;
-    border-radius:20px;
+width:380px;
+border-radius:20px;
 }
 
+/* ABOUT */
 .about{
-    padding:80px 60px;
-    background:#ffffff;
+padding:80px 60px;
+background:#ffffff;
+display:flex;
+align-items:center;
+gap:50px;
 }
-
-.about-container{
-    display:flex;
-    align-items:center;
-    gap:50px;
+.about img{
+width:320px;
+border-radius:20px;
 }
-
-.about-image img{
-    width:320px;
-    border-radius:20px;
-}
-
 .about-text h2{
-    font-size:32px;
-    color:#2F80ED;
-    margin-bottom:20px;
+color:#2F80ED;
+margin-bottom:20px;
 }
-
 .about-text p{
-    color:#6c7a89;
-    line-height:1.8;
-    margin-bottom:15px;
+color:#6c7a89;
+line-height:1.8;
 }
 
-.contact{
-    padding:60px;
-    text-align:center;
-}
-
-.contact a{
-    display:inline-block;
-    margin:10px;
-    padding:12px 20px;
-    background:#2F80ED;
-    color:#fff;
-    text-decoration:none;
-    border-radius:8px;
-}
-
+/* FOOTER */
 .footer{
-    text-align:center;
-    padding:20px;
-    font-size:14px;
-    color:#6c7a89;
+text-align:center;
+padding:20px;
+font-size:14px;
+color:#6c7a89;
+background:#ffffff;
 }
 
+/* RESPONSIVE */
 @media(max-width:900px){
-
-.hero{
-    flex-direction:column;
-    text-align:center;
-}
-
-.hero-img{
-    margin-top:30px;
-    text-align:center;
-}
-
-.about-container{
-    flex-direction:column;
-    text-align:center;
-}
-
+.hero{flex-direction:column;text-align:center;}
+.hero-img{margin-top:30px;text-align:center;}
+.about{flex-direction:column;text-align:center;}
 }
 </style>
 </head>
@@ -156,59 +101,66 @@ nav{
 <body>
 
 <nav>
-    <div class="logo">Dr. X Pharma Bhau</div>
-    <div class="nav-links">
-        <a href="#">Home</a>
-        <a href="#about">About</a>
-        <a href="#contact">Contact</a>
-    </div>
+<div class="logo">LyfeCare</div>
 </nav>
 
 <section class="hero">
-    <div class="hero-text">
-        <h1>Understand Your Medicines Better</h1>
-        <p>Medicine awareness & prescription guidance support in simple language.</p>
-        <a href="https://wa.me/919226758253" target="_blank">Chat on WhatsApp</a>
-    </div>
+<div class="hero-text">
+<h1>Understand Your Medicines Better</h1>
+<p>Educational medicine guidance support in simple language.</p>
+<button onclick="startPayment()">Book Guidance ₹199</button>
+</div>
 
-    <div class="hero-img">
-        <img src="https://images.unsplash.com/photo-1537368910025-700350fe46c7" alt="Healthcare">
-    </div>
+<div class="hero-img">
+<img src="https://images.unsplash.com/photo-1537368910025-700350fe46c7">
+</div>
 </section>
 
-<section class="about" id="about">
-    <div class="about-container">
-
-        <div class="about-image">
-            <img src="https://images.unsplash.com/photo-1582750433449-648ed127bb54" alt="Profile">
-        </div>
-
-        <div class="about-text">
-            <h2>About Me</h2>
-            <p>
-                Namaskar, mi Kamaji Jadhav, B.Pharmacy graduate.
-                Mi sadhya medical practice madhe kaam karto ani
-                lokanna simple language madhe medicine awareness dene majha uddesh ahe.
-            </p>
-            <p>
-                He platform educational guidance sathi ahe.
-                Diagnosis ani treatment sathi registered doctor cha salla ghya.
-            </p>
-        </div>
-
-    </div>
-</section>
-
-<section class="contact" id="contact">
-    <h2>Connect With Me</h2>
-    <a href="https://wa.me/919226758253" target="_blank">WhatsApp: 9226758253</a>
-    <a href="https://instagram.com/Dr.xpharmabhau" target="_blank">Instagram: @Dr.xpharmabhau</a>
+<section class="about">
+<img src="https://images.unsplash.com/photo-1582750433449-648ed127bb54">
+<div class="about-text">
+<h2>About</h2>
+<p>
+Mi B.Pharmacy graduate ahe ani medical practice madhe kaam karto.
+He platform educational guidance sathi ahe.
+Diagnosis ani treatment sathi registered doctor cha salla ghya.
+</p>
+</div>
 </section>
 
 <div class="footer">
-    *This platform provides educational medicine guidance only.
-    It is not a replacement for professional medical treatment.*
+*This platform provides educational guidance only.
+For diagnosis and treatment consult a registered medical practitioner.*
 </div>
+
+<script>
+function startPayment(){
+
+var options = {
+"key": "rzp_test_SM2ZMJ9p7cbKiG",
+"amount": "19900",
+"currency": "INR",
+"name": "LyfeCare",
+"description": "Medicine Guidance Session",
+"handler": function (response){
+
+var phone="919226758253";
+
+var message="Payment Successful%0APayment ID: "
++response.razorpay_payment_id+
+"%0APlease confirm available slot.";
+
+var url="https://wa.me/"+phone+"?text="+message;
+window.open(url,'_blank');
+
+},
+"theme": {"color": "#2F80ED"}
+};
+
+var rzp1 = new Razorpay(options);
+rzp1.open();
+}
+</script>
 
 </body>
 </html>
