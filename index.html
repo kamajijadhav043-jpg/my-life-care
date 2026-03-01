@@ -1,110 +1,195 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Luxe Walls | Luxury Wallpapers</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Healthcare Landing</title>
 
-  <!-- Main CSS -->
-  <link rel="stylesheet" href="css/style.css">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins', sans-serif;
+}
+
+body{
+    background:#f8fbff;
+    color:#1f2d3d;
+}
+
+.container{
+    width:90%;
+    max-width:1200px;
+    margin:auto;
+}
+
+nav{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:20px 0;
+}
+
+.logo{
+    font-size:22px;
+    font-weight:700;
+    color:#2F80ED;
+}
+
+.nav-links a{
+    margin:0 15px;
+    text-decoration:none;
+    color:#1f2d3d;
+    font-weight:500;
+}
+
+.nav-btn{
+    background:#2F80ED;
+    color:#fff;
+    padding:10px 20px;
+    border-radius:8px;
+    text-decoration:none;
+    font-weight:500;
+}
+
+.hero{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:60px 0;
+}
+
+.hero-text{
+    flex:1;
+}
+
+.hero-text h1{
+    font-size:48px;
+    font-weight:700;
+    margin-bottom:20px;
+}
+
+.hero-text p{
+    font-size:16px;
+    margin-bottom:30px;
+    color:#6c7a89;
+}
+
+.input-group{
+    display:flex;
+    gap:10px;
+}
+
+.input-group input{
+    padding:12px;
+    width:250px;
+    border-radius:8px;
+    border:1px solid #ddd;
+}
+
+.input-group button{
+    padding:12px 20px;
+    border:none;
+    background:#2F80ED;
+    color:#fff;
+    border-radius:8px;
+    cursor:pointer;
+}
+
+.hero-img{
+    flex:1;
+    text-align:right;
+}
+
+.hero-img img{
+    width:400px;
+    border-radius:20px;
+}
+
+.stats{
+    display:flex;
+    justify-content:space-between;
+    padding:40px 0;
+    text-align:center;
+}
+
+.stat-box h2{
+    color:#2F80ED;
+    font-size:32px;
+}
+
+.stat-box p{
+    font-size:14px;
+    color:#6c7a89;
+}
+
+@media(max-width:900px){
+    .hero{
+        flex-direction:column;
+        text-align:center;
+    }
+    .hero-img{
+        margin-top:30px;
+        text-align:center;
+    }
+    .stats{
+        flex-direction:column;
+        gap:20px;
+    }
+}
+</style>
 </head>
+
 <body>
 
-<!-- ================= HEADER ================= -->
-<header class="header">
-  <div class="logo">LUXE WALLS</div>
-  <nav class="nav">
-    <a href="index.html">Home</a>
-    <a href="products.html">Collection</a>
-    <a href="login.html">Account</a>
-    <a href="contact.html">Contact</a>
-  </nav>
-</header>
+<div class="container">
 
-<!-- ================= HERO ================= -->
+<nav>
+    <div class="logo">PharmaCare</div>
+    <div class="nav-links">
+        <a href="#">Home</a>
+        <a href="#">Services</a>
+        <a href="#">About</a>
+        <a href="#">Contact</a>
+        <a href="#" class="nav-btn">Get Started</a>
+    </div>
+</nav>
+
 <section class="hero">
-  <div class="hero-content">
-    <h1>Walls, Redefined</h1>
-    <p>
-      Luxury wallpapers crafted for modern interiors.  
-      Elevate your space with timeless design.
-    </p>
-    <a href="products.html" class="btn">View Collection</a>
-  </div>
-</section>
+    <div class="hero-text">
+        <h1>Save Time.<br>Healthcare Online</h1>
+        <p>Consult trusted healthcare professionals from your home easily and securely.</p>
 
-<!-- ================= FEATURED ================= -->
-<section class="section">
-  <h2 class="section-title">Featured Wallpapers</h2>
-
-  <div class="grid">
-    <!-- Card 1 -->
-    <div class="card" onclick="goProduct('Marble Noir',120)">
-      <img src="https://images.unsplash.com/photo-1600121848594-d8644e57abab" alt="Marble Noir">
-      <div class="card-info">
-        <h3>Marble Noir</h3>
-        <span>₹120 / sqft</span>
-      </div>
+        <div class="input-group">
+            <input type="email" placeholder="Enter your email">
+            <button>Get Started</button>
+        </div>
     </div>
 
-    <!-- Card 2 -->
-    <div class="card" onclick="goProduct('Royal Texture',150)">
-      <img src="https://images.unsplash.com/photo-1615874959474-d609969a20ed" alt="Royal Texture">
-      <div class="card-info">
-        <h3>Royal Texture</h3>
-        <span>₹150 / sqft</span>
-      </div>
+    <div class="hero-img">
+        <img src="https://images.unsplash.com/photo-1537368910025-700350fe46c7" alt="Doctor">
     </div>
-
-    <!-- Card 3 -->
-    <div class="card" onclick="goProduct('Modern Stone',140)">
-      <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c" alt="Modern Stone">
-      <div class="card-info">
-        <h3>Modern Stone</h3>
-        <span>₹140 / sqft</span>
-      </div>
-    </div>
-  </div>
 </section>
 
-<!-- ================= INSTAGRAM ================= -->
-<section class="section">
-  <h2 class="section-title">From Instagram</h2>
-  <p style="text-align:center;color:#aaa;margin-bottom:40px">
-    Follow <b>@jadhav_am0l</b> for interior inspiration
-  </p>
-
-  <div class="grid">
-    <img src="https://picsum.photos/600/600?1" alt="">
-    <img src="https://picsum.photos/600/600?2" alt="">
-    <img src="https://picsum.photos/600/600?3" alt="">
-  </div>
+<section class="stats">
+    <div class="stat-box">
+        <h2>4.9★</h2>
+        <p>Average Rating</p>
+    </div>
+    <div class="stat-box">
+        <h2>HHS</h2>
+        <p>Certified Doctors</p>
+    </div>
+    <div class="stat-box">
+        <h2>2M+</h2>
+        <p>Online Consultations</p>
+    </div>
 </section>
 
-<!-- ================= FOOTER ================= -->
-<footer class="footer">
-  <p>© 2026 Luxe Walls. All rights reserved.</p>
-  <p>
-    <a href="https://instagram.com/jadhav_am0l" target="_blank">Instagram</a> ·
-    <a href="https://wa.me/917030971315" target="_blank">WhatsApp</a>
-  </p>
-</footer>
-
-<!-- ================= WHATSAPP FLOAT ================= -->
-<a class="whatsapp"
-   href="https://wa.me/917030971315?text=Hi%20I%20am%20interested%20in%20your%20luxury%20wallpapers"
-   target="_blank">
-  WhatsApp
-</a>
-
-<!-- ================= JS ================= -->
-<script>
-  function goProduct(name, price) {
-    localStorage.setItem("productName", name);
-    localStorage.setItem("productPrice", price);
-    window.location.href = "product.html";
-  }
-</script>
+</div>
 
 </body>
 </html>
