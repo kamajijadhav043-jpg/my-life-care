@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Pharma Dashboard</title>
+<title>Dr. X Pharma Bhau</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
@@ -20,7 +20,6 @@ body{
     color:#1f2d3d;
 }
 
-/* NAVBAR */
 nav{
     display:flex;
     justify-content:space-between;
@@ -43,15 +42,6 @@ nav{
     font-weight:500;
 }
 
-.nav-btn{
-    background:#2F80ED;
-    color:#fff;
-    padding:8px 18px;
-    border-radius:8px;
-    text-decoration:none;
-}
-
-/* HERO */
 .hero{
     display:flex;
     justify-content:space-between;
@@ -73,13 +63,13 @@ nav{
     margin-bottom:25px;
 }
 
-.hero-text button{
+.hero-text a{
+    display:inline-block;
     padding:12px 25px;
-    border:none;
     background:#2F80ED;
     color:#fff;
+    text-decoration:none;
     border-radius:8px;
-    cursor:pointer;
 }
 
 .hero-img{
@@ -92,28 +82,6 @@ nav{
     border-radius:20px;
 }
 
-/* STATS */
-.stats{
-    display:flex;
-    justify-content:space-around;
-    padding:50px 60px;
-    background:#ffffff;
-}
-
-.stat-box{
-    text-align:center;
-}
-
-.stat-box h2{
-    color:#2F80ED;
-    font-size:30px;
-}
-
-.stat-box p{
-    color:#6c7a89;
-}
-
-/* ABOUT SECTION */
 .about{
     padding:80px 60px;
     background:#ffffff;
@@ -126,7 +94,7 @@ nav{
 }
 
 .about-image img{
-    width:350px;
+    width:320px;
     border-radius:20px;
 }
 
@@ -142,7 +110,28 @@ nav{
     margin-bottom:15px;
 }
 
-/* RESPONSIVE */
+.contact{
+    padding:60px;
+    text-align:center;
+}
+
+.contact a{
+    display:inline-block;
+    margin:10px;
+    padding:12px 20px;
+    background:#2F80ED;
+    color:#fff;
+    text-decoration:none;
+    border-radius:8px;
+}
+
+.footer{
+    text-align:center;
+    padding:20px;
+    font-size:14px;
+    color:#6c7a89;
+}
+
 @media(max-width:900px){
 
 .hero{
@@ -153,11 +142,6 @@ nav{
 .hero-img{
     margin-top:30px;
     text-align:center;
-}
-
-.stats{
-    flex-direction:column;
-    gap:30px;
 }
 
 .about-container{
@@ -172,44 +156,27 @@ nav{
 <body>
 
 <nav>
-    <div class="logo">PharmaCare</div>
+    <div class="logo">Dr. X Pharma Bhau</div>
     <div class="nav-links">
         <a href="#">Home</a>
-        <a href="#">Services</a>
-        <a href="#">About</a>
-        <a href="#">Contact</a>
-        <a href="#" class="nav-btn">Login</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
     </div>
 </nav>
 
 <section class="hero">
     <div class="hero-text">
-        <h1>Save Time.<br>Healthcare Online</h1>
-        <p>Consult trusted professionals and get medicine awareness easily.</p>
-        <button>Get Started</button>
+        <h1>Understand Your Medicines Better</h1>
+        <p>Medicine awareness & prescription guidance support in simple language.</p>
+        <a href="https://wa.me/919226758253" target="_blank">Chat on WhatsApp</a>
     </div>
 
     <div class="hero-img">
-        <img src="https://images.unsplash.com/photo-1537368910025-700350fe46c7" alt="Doctor">
+        <img src="https://images.unsplash.com/photo-1537368910025-700350fe46c7" alt="Healthcare">
     </div>
 </section>
 
-<section class="stats">
-    <div class="stat-box">
-        <h2>4.9★</h2>
-        <p>Average Rating</p>
-    </div>
-    <div class="stat-box">
-        <h2>100+</h2>
-        <p>Medicine Guides</p>
-    </div>
-    <div class="stat-box">
-        <h2>2K+</h2>
-        <p>Online Users</p>
-    </div>
-</section>
-
-<section class="about">
+<section class="about" id="about">
     <div class="about-container">
 
         <div class="about-image">
@@ -219,17 +186,29 @@ nav{
         <div class="about-text">
             <h2>About Me</h2>
             <p>
-                Namaskar, mi Kamaji Jadhav. Mi B.Pharmacy graduate ahe ani 
-                sadhya medical practice madhe kaam karto.
+                Namaskar, mi Kamaji Jadhav, B.Pharmacy graduate.
+                Mi sadhya medical practice madhe kaam karto ani
+                lokanna simple language madhe medicine awareness dene majha uddesh ahe.
             </p>
             <p>
-                Majha focus ahe responsible medicine awareness ani 
-                digital madhyam dware lokanna yogya mahiti pahochvane.
+                He platform educational guidance sathi ahe.
+                Diagnosis ani treatment sathi registered doctor cha salla ghya.
             </p>
         </div>
 
     </div>
 </section>
+
+<section class="contact" id="contact">
+    <h2>Connect With Me</h2>
+    <a href="https://wa.me/919226758253" target="_blank">WhatsApp: 9226758253</a>
+    <a href="https://instagram.com/Dr.xpharmabhau" target="_blank">Instagram: @Dr.xpharmabhau</a>
+</section>
+
+<div class="footer">
+    *This platform provides educational medicine guidance only.
+    It is not a replacement for professional medical treatment.*
+</div>
 
 </body>
 </html>
