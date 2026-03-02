@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>LyfeCare - Smart Medicine Guidance</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 
 <style>
 *{
@@ -16,54 +16,50 @@ font-family:'Poppins', sans-serif;
 }
 
 body{
-background:#F4F8FF;
+background:linear-gradient(to bottom,#F4F8FF,#EAF2FF);
 color:#1F2D3D;
 }
 
 nav{
 display:flex;
-justify-content:space-between;
-align-items:center;
-padding:20px 60px;
+justify-content:center;
+padding:18px;
 background:#ffffff;
 box-shadow:0 2px 8px rgba(0,0,0,0.05);
 }
 
 .logo{
-font-size:22px;
+font-size:20px;
 font-weight:700;
 color:#2F80ED;
 }
 
 .hero{
-display:flex;
-justify-content:space-between;
-align-items:center;
-padding:80px 60px;
+padding:60px 20px;
+text-align:center;
 }
 
-.hero-text{
-flex:1;
+.hero h1{
+font-size:28px;
+margin-bottom:15px;
+line-height:1.3;
 }
 
-.hero-text h1{
-font-size:40px;
-margin-bottom:20px;
-}
-
-.hero-text p{
+.hero p{
 color:#6C7A89;
 margin-bottom:25px;
-font-size:16px;
+font-size:14px;
 }
 
 .btn{
-display:inline-block;
-padding:14px 28px;
-border-radius:8px;
+display:block;
+width:100%;
+padding:14px;
+border-radius:12px;
 text-decoration:none;
-font-size:16px;
-margin-right:15px;
+font-size:15px;
+margin-bottom:15px;
+font-weight:600;
 }
 
 .btn-free{
@@ -74,76 +70,43 @@ color:#ffffff;
 .btn-premium{
 background:#2F80ED;
 color:#ffffff;
-}
-
-.hero-img{
-flex:1;
-text-align:right;
-}
-
-.hero-img img{
-width:380px;
-border-radius:20px;
+box-shadow:0 4px 12px rgba(47,128,237,0.3);
 }
 
 .services{
-padding:80px 60px;
-background:#ffffff;
-text-align:center;
+padding:50px 20px;
 }
 
 .services h2{
-margin-bottom:40px;
+text-align:center;
+margin-bottom:30px;
 color:#2F80ED;
-}
-
-.service-cards{
-display:flex;
-justify-content:space-between;
-gap:20px;
+font-size:20px;
 }
 
 .card{
-flex:1;
-background:#F4F8FF;
-padding:30px;
+background:#ffffff;
+padding:20px;
 border-radius:16px;
-box-shadow:0 4px 10px rgba(0,0,0,0.05);
+margin-bottom:20px;
+box-shadow:0 6px 15px rgba(0,0,0,0.06);
 }
 
 .card h3{
-margin-bottom:15px;
+margin-bottom:10px;
+font-size:16px;
 }
 
 .card p{
 color:#6C7A89;
-font-size:14px;
+font-size:13px;
 }
 
 .footer{
 text-align:center;
 padding:20px;
-background:#ffffff;
-font-size:13px;
+font-size:12px;
 color:#6C7A89;
-}
-
-@media(max-width:900px){
-
-.hero{
-flex-direction:column;
-text-align:center;
-}
-
-.hero-img{
-margin-top:30px;
-text-align:center;
-}
-
-.service-cards{
-flex-direction:column;
-}
-
 }
 </style>
 </head>
@@ -155,12 +118,8 @@ flex-direction:column;
 </nav>
 
 <section class="hero">
-<div class="hero-text">
 <h1>Tumchya Medicines Samjun Ghya – Smart Paddhatine</h1>
-<p>
-Free basic guidance available.  
-Detailed premium support ₹29 madhe.
-</p>
+<p>Free basic guidance available. Detailed premium support ₹29 madhe.</p>
 
 <a href="https://wa.me/919226758253?text=Hello%20LyfeCare,%20mala%20free%20medicine%20guidance%20pahije."
 class="btn btn-free">
@@ -172,17 +131,10 @@ class="btn btn-premium">
 Get Detailed Support – ₹29
 </a>
 
-</div>
-
-<div class="hero-img">
-<img src="https://images.unsplash.com/photo-1537368910025-700350fe46c7">
-</div>
 </section>
 
 <section class="services">
 <h2>Our Services</h2>
-
-<div class="service-cards">
 
 <div class="card">
 <h3>💊 Medicine Explanation</h3>
@@ -199,11 +151,10 @@ Get Detailed Support – ₹29
 <p>Common health doubts simple Marathi madhe.</p>
 </div>
 
-</div>
 </section>
 
 <div class="footer">
-This platform provides educational guidance only.  
+This platform provides educational guidance only.
 For diagnosis and treatment consult a registered medical practitioner.
 </div>
 
