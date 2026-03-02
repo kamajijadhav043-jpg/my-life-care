@@ -3,13 +3,22 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>LyfeCare - Medicine Guidance</title>
+<title>LyfeCare - Smart Medicine Guidance</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
-body{background:#f4f8ff;color:#1f2d3d;}
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins', sans-serif;
+}
+
+body{
+background:#F4F8FF;
+color:#1F2D3D;
+}
 
 nav{
 display:flex;
@@ -17,8 +26,9 @@ justify-content:space-between;
 align-items:center;
 padding:20px 60px;
 background:#ffffff;
-box-shadow:0 2px 10px rgba(0,0,0,0.05);
+box-shadow:0 2px 8px rgba(0,0,0,0.05);
 }
+
 .logo{
 font-size:22px;
 font-weight:700;
@@ -31,69 +41,109 @@ justify-content:space-between;
 align-items:center;
 padding:80px 60px;
 }
-.hero-text{flex:1;}
+
+.hero-text{
+flex:1;
+}
+
 .hero-text h1{
-font-size:42px;
+font-size:40px;
 margin-bottom:20px;
 }
+
 .hero-text p{
-color:#6c7a89;
+color:#6C7A89;
 margin-bottom:25px;
-}
-.hero-text a{
-display:inline-block;
-padding:14px 28px;
-background:#2F80ED;
-color:#fff;
-text-decoration:none;
-border-radius:8px;
 font-size:16px;
 }
 
-.hero-img{flex:1;text-align:right;}
+.btn{
+display:inline-block;
+padding:14px 28px;
+border-radius:8px;
+text-decoration:none;
+font-size:16px;
+margin-right:15px;
+}
+
+.btn-free{
+background:#25D366;
+color:#ffffff;
+}
+
+.btn-premium{
+background:#2F80ED;
+color:#ffffff;
+}
+
+.hero-img{
+flex:1;
+text-align:right;
+}
+
 .hero-img img{
 width:380px;
 border-radius:20px;
 }
 
-.about{
+.services{
 padding:80px 60px;
 background:#ffffff;
-display:flex;
-align-items:center;
-gap:50px;
-}
-.about img{
-width:320px;
-border-radius:20px;
-}
-.about-text h2{
-color:#2F80ED;
-margin-bottom:20px;
-}
-.about-text p{
-color:#6c7a89;
-line-height:1.8;
+text-align:center;
 }
 
-.payment-note{
-margin-top:15px;
+.services h2{
+margin-bottom:40px;
+color:#2F80ED;
+}
+
+.service-cards{
+display:flex;
+justify-content:space-between;
+gap:20px;
+}
+
+.card{
+flex:1;
+background:#F4F8FF;
+padding:30px;
+border-radius:16px;
+box-shadow:0 4px 10px rgba(0,0,0,0.05);
+}
+
+.card h3{
+margin-bottom:15px;
+}
+
+.card p{
+color:#6C7A89;
 font-size:14px;
-color:#6c7a89;
 }
 
 .footer{
 text-align:center;
 padding:20px;
-font-size:14px;
-color:#6c7a89;
 background:#ffffff;
+font-size:13px;
+color:#6C7A89;
 }
 
 @media(max-width:900px){
-.hero{flex-direction:column;text-align:center;}
-.hero-img{margin-top:30px;text-align:center;}
-.about{flex-direction:column;text-align:center;}
+
+.hero{
+flex-direction:column;
+text-align:center;
+}
+
+.hero-img{
+margin-top:30px;
+text-align:center;
+}
+
+.service-cards{
+flex-direction:column;
+}
+
 }
 </style>
 </head>
@@ -106,22 +156,20 @@ background:#ffffff;
 
 <section class="hero">
 <div class="hero-text">
-<h1>Understand Your Medicines Better</h1>
-<p>Educational medicine guidance support in simple language.</p>
+<h1>Tumchya Medicines Samjun Ghya – Smart Paddhatine</h1>
+<p>
+Free basic guidance available.  
+Detailed premium support ₹29 madhe.
+</p>
 
-<a href="upi://pay?pa=kamajijadhav043@ybl&pn=LyfeCare&am=199&cu=INR">
-Pay ₹199 via UPI
+<a href="https://wa.me/919226758253?text=Hello%20LyfeCare,%20mala%20free%20medicine%20guidance%20pahije."
+class="btn btn-free">
+Get Free Guidance
 </a>
 
-<div class="payment-note">
-After payment, please send payment screenshot on WhatsApp to confirm your slot.
-</div>
-
-<br><br>
-
-<a href="https://wa.me/919226758253" 
-style="background:#25D366;">
-Send Payment Screenshot on WhatsApp
+<a href="upi://pay?pa=kamajijadhav043@ybl&pn=LyfeCare&am=29&cu=INR"
+class="btn btn-premium">
+Get Detailed Support – ₹29
 </a>
 
 </div>
@@ -131,21 +179,32 @@ Send Payment Screenshot on WhatsApp
 </div>
 </section>
 
-<section class="about">
-<img src="https://images.unsplash.com/photo-1582750433449-648ed127bb54">
-<div class="about-text">
-<h2>About</h2>
-<p>
-Mi B.Pharmacy graduate ahe ani medical practice madhe kaam karto.
-He platform educational guidance sathi ahe.
-Diagnosis ani treatment sathi registered doctor cha salla ghya.
-</p>
+<section class="services">
+<h2>Our Services</h2>
+
+<div class="service-cards">
+
+<div class="card">
+<h3>💊 Medicine Explanation</h3>
+<p>Hi goli kashasathi ahe te samjun ghya.</p>
+</div>
+
+<div class="card">
+<h3>📄 Prescription Understanding</h3>
+<p>Doctor ne lihilela prescription explain karu.</p>
+</div>
+
+<div class="card">
+<h3>🧠 Basic Health Awareness</h3>
+<p>Common health doubts simple Marathi madhe.</p>
+</div>
+
 </div>
 </section>
 
 <div class="footer">
-*This platform provides educational guidance only.
-For diagnosis and treatment consult a registered medical practitioner.*
+This platform provides educational guidance only.  
+For diagnosis and treatment consult a registered medical practitioner.
 </div>
 
 </body>
